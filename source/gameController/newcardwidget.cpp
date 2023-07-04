@@ -4,7 +4,6 @@
 
 NewCardWidget::NewCardWidget(QGraphicsItem *parent) : QGraphicsItem(parent)
 {
-    setPos(QPointF(2000,50));
 }
 
 QRectF NewCardWidget::boundingRect() const

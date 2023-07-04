@@ -7,6 +7,8 @@ CardModel::CardModel(CardSuit cardSuit, CardValue cardValue, QRectF rect)
 
 int CardModel::value() const { return _value; }
 
+QPointF CardModel::pos() const { return _pos; }
+
 int CardModel::cardValue() const { return _value; }
 
 QRectF CardModel::boundingRect() const { return _boundingRect; }

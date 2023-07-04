@@ -5,18 +5,23 @@ set(SOURCES
     scene/scene.cpp
     scene/sceneview.cpp
     scene/mainwindow.cpp
-    scene/gamewidget.cpp
-    scene/newcardwidget.cpp
+    gameController/gamewidget.cpp
+    gameController/newcardwidget.cpp
+    gameController/betwidget.cpp
+    gameController/cardvisibilitytoggle.cpp
     cards/abstractcard.cpp
     model/cardmodel.cpp
+    resource/frontcardimage.qrc
 )
 
 set(HEADERS
     scene/scene.h
     scene/sceneview.h
     scene/mainwindow.h
-    scene/gamewidget.h
-    scene/newcardwidget.h
+    gameController/gamewidget.h
+    gameController/newcardwidget.h
+    gameController/betwidget.h
+    gameController/cardvisibilitytoggle.h
     cards/abstractcard.h
     model/cardmodel.h
     model/cardsuit.h
@@ -29,3 +34,6 @@ target_link_libraries(${PROJECT_NAME}
    Qt6::Widgets
    Qt6::Core
 )
+
+qt6_add_resources(RESOURCES resource/frontcardimage.qrc)
+target_sources(${PROJECT_NAME} PRIVATE ${RESOURCES})

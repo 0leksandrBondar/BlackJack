@@ -4,13 +4,13 @@
 
 #include <Qpainter>
 #include <QGraphicsSceneMouseEvent>
+#include <QPixmap>
 
 AbstractCard::AbstractCard(std::pair<CardSuit, CardValue> carType, QGraphicsItem *parent)
     : QGraphicsItem(parent),
       _cardModel{ std::make_unique<CardModel>(carType.first, carType.second,
                                               QRectF(0, 0, 110, 160)) }
 {
-    moveBy(2200,-100);
 }
 
 QRectF AbstractCard::boundingRect() const
@@ -20,7 +20,14 @@ QRectF AbstractCard::boundingRect() const
 
 void AbstractCard::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setPen(Qt::red);
-    painter->setBrush(Qt::red);
-    painter->drawRect(boundingRect());
+    const QRect rect{ boundingRect().toRect() };
+    QPixmap pixmap(":/2.jpg");
+
+    if (pixmap.isNull())
+        return;
+
+    painter->setBrush(pixmap);
+    painter->setPen(Qt::black);
+    painter->setRenderHint(QPainter::Antialiasing);
+    painter->drawPixmap(rect, pixmap);
 }

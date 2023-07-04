@@ -14,6 +14,7 @@ public:
     AbstractCard(std::pair<CardSuit, CardValue> carType, QGraphicsItem *parent = nullptr);
 
     QRectF boundingRect() const override;
+
 protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
