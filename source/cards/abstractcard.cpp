@@ -3,7 +3,6 @@
 #include "model/cardmodel.h"
 
 #include <Qpainter>
-#include <QGraphicsSceneMouseEvent>
 #include <QPixmap>
 
 AbstractCard::AbstractCard(std::pair<CardSuit, CardValue> carType, QString path,

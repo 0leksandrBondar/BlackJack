@@ -2,6 +2,58 @@
     <qresource prefix="/">
         <file>dib.png</file>
         <file>fon.jpg</file>
+        <file>whiteCards/diamonds_two.png</file>
+        <file>whiteCards/diamonds_three.png</file>
+        <file>whiteCards/diamonds_four.png</file>
+        <file>whiteCards/diamonds_five.png</file>
+        <file>whiteCards/diamonds_seven.png</file>
+        <file>whiteCards/diamonds_six.png</file>
+        <file>whiteCards/diamonds_eight.png</file>
+        <file>whiteCards/diamonds_jeck.png</file>
+        <file>whiteCards/diamonds_nine.png</file>
+        <file>whiteCards/diamonds_ten.png</file>
+        <file>whiteCards/diamonds_ace.png</file>
+        <file>whiteCards/diamonds_king.png</file>
+        <file>whiteCards/diamonds_queen.png</file>
+        <file>whiteCards/clubs_four.png</file>
         <file>whiteCards/clubs_two.png</file>
+        <file>whiteCards/clubs_three.png</file>
+        <file>whiteCards/clubs_eight.png</file>
+        <file>whiteCards/clubs_five.png</file>
+        <file>whiteCards/clubs_jeck.png</file>
+        <file>whiteCards/clubs_nine.png</file>
+        <file>whiteCards/clubs_seven.png</file>
+        <file>whiteCards/clubs_six.png</file>
+        <file>whiteCards/clubs_ten.png</file>
+        <file>whiteCards/clubs_ace.png</file>
+        <file>whiteCards/clubs_king.png</file>
+        <file>whiteCards/clubs_queen.png</file>
+        <file>whiteCards/hearts_ace.png</file>
+        <file>whiteCards/hearts_eight.png</file>
+        <file>whiteCards/hearts_five.png</file>
+        <file>whiteCards/hearts_four.png</file>
+        <file>whiteCards/hearts_jeck.png</file>
+        <file>whiteCards/hearts_king.png</file>
+        <file>whiteCards/hearts_nine.png</file>
+        <file>whiteCards/hearts_queen.png</file>
+        <file>whiteCards/hearts_seven.png</file>
+        <file>whiteCards/hearts_six.png</file>
+        <file>whiteCards/hearts_ten.png</file>
+        <file>whiteCards/hearts_three.png</file>
+        <file>whiteCards/hearts_two.png</file>
+        <file>whiteCards/spades_ace.png</file>
+        <file>whiteCards/spades_eight.png</file>
+        <file>whiteCards/spades_five.png</file>
+        <file>whiteCards/spades_four.png</file>
+        <file>whiteCards/spades_jeck.png</file>
+        <file>whiteCards/spades_king.png</file>
+        <file>whiteCards/spades_nine.png</file>
+        <file>whiteCards/spades_queen.png</file>
+        <file>whiteCards/spades_seven.png</file>
+        <file>whiteCards/spades_six.png</file>
+        <file>whiteCards/spades_ten.png</file>
+        <file>whiteCards/spades_three.png</file>
+        <file>whiteCards/spades_two.png</file>
+        <file>whiteCards/back.png</file>
     </qresource>
 </RCC>
