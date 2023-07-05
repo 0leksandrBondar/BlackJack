@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/">
-        <file>1.jpg</file>
-        <file>2.jpg</file>
+        <file>dib.png</file>
         <file>fon.jpg</file>
+        <file>whiteCards/clubs_two.png</file>
     </qresource>
 </RCC>

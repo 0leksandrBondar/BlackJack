@@ -6,8 +6,10 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QPixmap>
 
-AbstractCard::AbstractCard(std::pair<CardSuit, CardValue> carType, QGraphicsItem *parent)
+AbstractCard::AbstractCard(std::pair<CardSuit, CardValue> carType, QString path,
+                           QGraphicsItem *parent)
     : QGraphicsItem(parent),
+      _pathImage(path),
       _cardModel{ std::make_unique<CardModel>(carType.first, carType.second,
                                               QRectF(0, 0, 110, 160)) }
 {
@@ -21,7 +23,7 @@ QRectF AbstractCard::boundingRect() const
 void AbstractCard::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     const QRect rect{ boundingRect().toRect() };
-    QPixmap pixmap(":/2.jpg");
+    QPixmap pixmap(_pathImage);
 
     if (pixmap.isNull())
         return;

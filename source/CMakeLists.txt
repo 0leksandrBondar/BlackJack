@@ -9,7 +9,11 @@ set(SOURCES
     gameController/newcardwidget.cpp
     gameController/betwidget.cpp
     gameController/cardvisibilitytoggle.cpp
+    gameController/gameController.cpp
     cards/abstractcard.cpp
+    players/player.cpp
+    players/dealer.cpp
+    players/abstractplayer.cpp
     model/cardmodel.cpp
     resource/frontcardimage.qrc
 )
@@ -22,7 +26,11 @@ set(HEADERS
     gameController/newcardwidget.h
     gameController/betwidget.h
     gameController/cardvisibilitytoggle.h
+    gameController/gameController.h
     cards/abstractcard.h
+    players/dealer.h
+    players/player.h
+    players/abstractplayer.h
     model/cardmodel.h
     model/cardsuit.h
 )

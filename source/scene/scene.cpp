@@ -1,33 +1,30 @@
 #include "scene.h"
 
-#include "cards/abstractcard.h"
 #include "gameController/betwidget.h"
+#include "gameController/cardvisibilitytoggle.h"
+#include "gameController/gameController.h"
 #include "gameController/newcardwidget.h"
-#include "model/cardsuit.h"
 
-#include <QGraphicsSceneMouseEvent>
+#include <QDebug>
 
-Scene::Scene(QObject *parent) : QGraphicsScene(parent)
+namespace Constants
+{
+const QPointF betWidgetPos = { 30, 300 };
+const QPointF cardVisitorPos = { 1000, 400 };
+const QPointF newCardWidgetPos = { 1000, 230 };
+} // namespace Constants
+
+Scene::Scene(QObject *parent)
+    : QGraphicsScene(parent),
+      _betWidget(new BetWidget()),
+      _newCardWidget(new NewCardWidget()),
+      _gameController(new GameController(this)),
+      _cardVisitor(new CardVisibilityToggle())
 {
     setSceneRect(0, 0, 1200, 640);
-
-    setBackgroundBrush(QColorConstants::Svg::lightgreen);
-    NewCardWidget *widget = new NewCardWidget();
-    BetWidget *bigBet = new BetWidget();
-    BetWidget *smallBet = new BetWidget();
-
-    AbstractCard *card = new AbstractCard({ CardSuit::Clubs, CardValue::Five });
-
-    card->moveBy(500, 475);
-    bigBet->moveBy(50, 200);
-    smallBet->moveBy(50, 320);
-    widget->moveBy(980, 230);
-
-    addItem(card);
-    addItem(widget);
-    addItem(bigBet);
-    addItem(smallBet);
-    setBackgroundImage(":/fon.jpg");
+    addBaseWidgetsOnScene();
+    setCustomPositionForBaseWidgets();
+    setBackgroundImage(QStringLiteral(":/fon.jpg"));
 }
 
 void Scene::setBackgroundImage(const QString path)
@@ -37,4 +34,19 @@ void Scene::setBackgroundImage(const QString path)
         return;
 
     setBackgroundBrush(backgroundImage);
+}
+
+void Scene::addBaseWidgetsOnScene()
+{
+    addItem(_betWidget);
+    addItem(_newCardWidget);
+    addItem(_cardVisitor);
+}
+
+void Scene::setCustomPositionForBaseWidgets()
+{
+    using namespace Constants;
+    _betWidget->setPos(betWidgetPos);
+    _cardVisitor->setPos(cardVisitorPos);
+    _newCardWidget->setPos(newCardWidgetPos);
 }

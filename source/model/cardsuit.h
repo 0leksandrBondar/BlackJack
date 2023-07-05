@@ -9,7 +9,8 @@ enum class CardSuit
     Undefined
 };
 
-enum class CardValue {
+enum class CardValue
+{
     Two,
     Three,
     Four,
