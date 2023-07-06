@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include "gameController/gamewidget.h"
+#include "graphicsItems/gamewidget.h"
 #include "sceneview.h"
 
 #include <QVBoxLayout>

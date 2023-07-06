@@ -5,10 +5,11 @@ set(SOURCES
     scene/scene.cpp
     scene/sceneview.cpp
     scene/mainwindow.cpp
-    gameController/gamewidget.cpp
-    gameController/newcardwidget.cpp
-    gameController/betwidget.cpp
-    gameController/cardvisibilitytoggle.cpp
+    graphicsItems/gamewidget.cpp
+    graphicsItems/newcardwidget.cpp
+    graphicsItems/betwidget.cpp
+    graphicsItems/cardvisibilitytoggle.cpp
+    graphicsItems/label.cpp
     gameController/gameController.cpp
     cards/abstractcard.cpp
     players/player.cpp
@@ -22,10 +23,11 @@ set(HEADERS
     scene/scene.h
     scene/sceneview.h
     scene/mainwindow.h
-    gameController/gamewidget.h
-    gameController/newcardwidget.h
-    gameController/betwidget.h
-    gameController/cardvisibilitytoggle.h
+    graphicsItems/gamewidget.h
+    graphicsItems/newcardwidget.h
+    graphicsItems/betwidget.h
+    graphicsItems/cardvisibilitytoggle.h
+    graphicsItems/label.h
     gameController/gameController.h
     cards/abstractcard.h
     players/dealer.h

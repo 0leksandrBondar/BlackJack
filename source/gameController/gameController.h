@@ -1,12 +1,15 @@
 #pragma once
 
-#include "qpoint.h"
+#include <QPointF>
 #include <QObject>
+
+#include <vector>
 
 class Scene;
 class Dealer;
 class Player;
 class AbstractCard;
+class NewCardWidget;
 
 class GameController : public QObject
 {
@@ -15,11 +18,15 @@ public:
     GameController(Scene *scene = nullptr);
     ~GameController();
 
-    void onClickedNewCardWidget(AbstractCard *card);
+    void onClickedNewCardWidget();
+private:
+    AbstractCard *getNewCardFromStack();
 
 private:
-    QPointF castomPos = {500,500};
     Scene *_scene;
     Player *_player;
     Dealer *_dealer;
+    NewCardWidget *_newCardWidget;
+    QPointF _defaultPlayerCardPos{ 400, 470 };
+    std::vector<std::unique_ptr<AbstractCard>> _cardStack;
 };

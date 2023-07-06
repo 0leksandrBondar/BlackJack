@@ -1,9 +1,9 @@
 #include "scene.h"
 
-#include "gameController/betwidget.h"
-#include "gameController/cardvisibilitytoggle.h"
 #include "gameController/gameController.h"
-#include "gameController/newcardwidget.h"
+#include "graphicsItems/betwidget.h"
+#include "graphicsItems/cardvisibilitytoggle.h"
+#include "graphicsItems/newcardwidget.h"
 
 #include <QGraphicsSceneMouseEvent>
 
@@ -14,13 +14,11 @@ namespace Constants
 const QPointF betWidgetPos = { 30, 300 };
 const QPointF defaultCardPos = { 500, 500 };
 const QPointF cardVisitorPos = { 1000, 400 };
-const QPointF newCardWidgetPos = { 1000, 230 };
 } // namespace Constants
 
 Scene::Scene(QObject *parent)
     : QGraphicsScene(parent),
       _betWidget(new BetWidget()),
-      _newCardWidget(new NewCardWidget()),
       _gameController(new GameController(this)),
       _cardVisitor(new CardVisibilityToggle())
 {
@@ -28,7 +26,8 @@ Scene::Scene(QObject *parent)
     addBaseWidgetsOnScene();
     setCustomPositionForBaseWidgets();
     setBackgroundImage(QStringLiteral(":/fon.jpg"));
-    connect(this, &Scene::clickOnAddCardWidget, _gameController,  &GameController::onClickedNewCardWidget);
+    connect(this, &Scene::clickOnAddCardWidget, _gameController,
+            &GameController::onClickedNewCardWidget);
 }
 
 void Scene::mousePressEvent(QGraphicsSceneMouseEvent *event)
@@ -42,7 +41,7 @@ void Scene::mousePressEvent(QGraphicsSceneMouseEvent *event)
         for (QGraphicsItem *item : Items)
         {
             if (dynamic_cast<NewCardWidget *>(item))
-                emit clickOnAddCardWidget(_newCardWidget->getNewCard());
+                emit clickOnAddCardWidget();
         }
     }
 }
@@ -59,7 +58,6 @@ void Scene::setBackgroundImage(const QString path)
 void Scene::addBaseWidgetsOnScene()
 {
     addItem(_betWidget);
-    addItem(_newCardWidget);
     addItem(_cardVisitor);
 }
 
@@ -68,5 +66,4 @@ void Scene::setCustomPositionForBaseWidgets()
     using namespace Constants;
     _betWidget->setPos(betWidgetPos);
     _cardVisitor->setPos(cardVisitorPos);
-    _newCardWidget->setPos(newCardWidgetPos);
 }

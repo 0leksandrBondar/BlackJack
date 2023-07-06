@@ -16,6 +16,8 @@ public:
 
     QRectF boundingRect() const override;
 
+    std::pair<CardSuit, CardValue> cardType() const;
+
 protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 

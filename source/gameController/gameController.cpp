@@ -1,15 +1,24 @@
 #include "gameController.h"
 
 #include "cards/abstractcard.h"
+#include "graphicsItems/newcardwidget.h"
 #include "players/dealer.h"
 #include "players/player.h"
 #include "scene/scene.h"
 
 #include <QGraphicsItem>
+#include <random>
 
 GameController::GameController(Scene *scene)
-    : QObject(nullptr), _scene(scene), _player(new Player()), _dealer(new Dealer())
+    : QObject(nullptr),
+      _scene(scene),
+      _player(new Player()),
+      _dealer(new Dealer()),
+      _newCardWidget(new NewCardWidget()),
+      _cardStack(_newCardWidget->initCardStack())
 {
+    _scene->addItem(_newCardWidget);
+    _newCardWidget->setPos(1000, 230);
 }
 
 GameController::~GameController()
@@ -18,13 +27,51 @@ GameController::~GameController()
     delete _dealer;
 }
 
-void GameController::onClickedNewCardWidget(AbstractCard *card)
+void GameController::onClickedNewCardWidget()
 {
-    _player->addCard(card);
-   // _dealer->addCard(card);
-    card->setX(castomPos.x() + 25);
-    card->setPos(castomPos);
-    _scene->addItem(card);
+    const auto newCard = getNewCardFromStack();
+    const auto itemsOnScene = _scene->items();
+
+    bool cardExistsOnScene = false;
+
+    for (const auto item : itemsOnScene)
+    {
+        const auto cardItem = dynamic_cast<AbstractCard *>(item);
+        if (cardItem && newCard->cardType() == cardItem->cardType())
+        {
+            cardExistsOnScene = true;
+            break;
+        }
+    }
+
+    if (!cardExistsOnScene)
+    {
+        const auto distanceBetweenCards = 40;
+
+        _player->addCard(newCard);
+
+        _scene->addItem(newCard);
+
+        newCard->setPos(_defaultPlayerCardPos);
+
+        _defaultPlayerCardPos.setX(_defaultPlayerCardPos.x() + distanceBetweenCards);
+    }
+    else
+    {
+        onClickedNewCardWidget();
+    }
+}
 
 
+
+AbstractCard *GameController::getNewCardFromStack()
+{
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<size_t> dis(0, _cardStack.size() - 1);
+    size_t randomIndex = dis(gen);
+
+    AbstractCard *newCard = _cardStack[randomIndex].get();
+
+    return newCard;
 }

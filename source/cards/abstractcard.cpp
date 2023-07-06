@@ -19,6 +19,13 @@ QRectF AbstractCard::boundingRect() const
     return _cardModel.get()->boundingRect();
 }
 
+std::pair<CardSuit, CardValue> AbstractCard::cardType() const
+{
+    return _cardModel.get()->card();
+}
+
+
+
 void AbstractCard::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     const QRect rect{ boundingRect().toRect() };
