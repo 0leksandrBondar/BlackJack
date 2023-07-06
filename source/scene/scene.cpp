@@ -5,11 +5,14 @@
 #include "gameController/gameController.h"
 #include "gameController/newcardwidget.h"
 
+#include <QGraphicsSceneMouseEvent>
+
 #include <QDebug>
 
 namespace Constants
 {
 const QPointF betWidgetPos = { 30, 300 };
+const QPointF defaultCardPos = { 500, 500 };
 const QPointF cardVisitorPos = { 1000, 400 };
 const QPointF newCardWidgetPos = { 1000, 230 };
 } // namespace Constants
@@ -25,6 +28,23 @@ Scene::Scene(QObject *parent)
     addBaseWidgetsOnScene();
     setCustomPositionForBaseWidgets();
     setBackgroundImage(QStringLiteral(":/fon.jpg"));
+    connect(this, &Scene::clickOnAddCardWidget, _gameController,  &GameController::onClickedNewCardWidget);
+}
+
+void Scene::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
+        QPointF clickPos = event->scenePos();
+
+        QList<QGraphicsItem *> Items = items(clickPos);
+
+        for (QGraphicsItem *item : Items)
+        {
+            if (dynamic_cast<NewCardWidget *>(item))
+                emit clickOnAddCardWidget(_newCardWidget->getNewCard());
+        }
+    }
 }
 
 void Scene::setBackgroundImage(const QString path)
