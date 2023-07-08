@@ -1,13 +1,17 @@
 #pragma once
 
+#include "model/cardsuit.h"
+
 #include <QVector>
 
+class PlayerModel;
 class AbstractCard;
 
 class AbstractPlayer
 {
 public:
     AbstractPlayer();
+    ~AbstractPlayer();
 
     int score() const;
     void updateScore(int value);
@@ -15,10 +19,10 @@ public:
     int balance() const;
     void updateBalance(int value);
 
-    void addCard(AbstractCard *newCard);
+    void addCard(CardValue cardValue);
 
 private:
-    int _score;
     int _balance;
-    QVector<AbstractCard *> _cards;
+    PlayerModel *_playerModel;
+   // QVector<std::shared_ptr<AbstractCard>> _cards;
 };

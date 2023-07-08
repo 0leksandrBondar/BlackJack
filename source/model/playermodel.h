@@ -14,6 +14,6 @@ public:
     void calculateScore();
 
 private:
-    int _score;
+    int _score{ 0 };
     std::vector<CardValue> _cardValues;
 };

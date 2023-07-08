@@ -9,6 +9,7 @@
 
 #include <QGraphicsItem>
 #include <random>
+#include <QDebug>
 
 GameController::GameController(Scene *scene)
     : QObject(nullptr),
@@ -23,6 +24,7 @@ GameController::GameController(Scene *scene)
     addLabelsOnScene();
     _scene->addItem(_newCardWidget);
     _newCardWidget->setPos(1000, 230);
+    connect(this, &GameController::playerReceivedCards, this, &GameController::addNewCardToDealer);
 }
 
 GameController::~GameController()
@@ -34,51 +36,47 @@ GameController::~GameController()
 void GameController::onClickedNewCardWidget()
 {
     const auto newCard = getNewCardFromStack();
-    const auto itemsOnScene = _scene->items();
+    const auto distanceBetweenCards = 40;
 
-    bool cardExistsOnScene = false;
+    newCard->setPos(_defaultPlayerCardPos);
+    _player->addCard(newCard->cardType().second);
+    _scene->addItem(newCard.get());
+    _playerLabel->setPlainText("player: "  + QString::number(_player->score()));
+    qDebug() <<  _scene->items().contains(newCard.get());
 
-    for (const auto item : itemsOnScene)
-    {
-        const auto cardItem = dynamic_cast<AbstractCard *>(item);
-        if (cardItem && newCard->cardType() == cardItem->cardType())
-        {
-            cardExistsOnScene = true;
-            break;
-        }
-    }
 
-    if (!cardExistsOnScene)
-    {
-        const auto distanceBetweenCards = 40;
+    _defaultPlayerCardPos.setX(_defaultPlayerCardPos.x() + distanceBetweenCards);
 
-        _player->addCard(newCard);
+    emit playerReceivedCards();
+}
 
-        _scene->addItem(newCard);
+void GameController::addNewCardToDealer()
+{
+    // this func must be refoctored and combined with onClickedNewCardWidget()
+    auto newCard = getNewCardFromStack();
+    const auto distanceBetweenCards = 40;
 
-        newCard->setPos(_defaultPlayerCardPos);
+    _dealer->addCard(newCard->cardType().second);
+   // newCard->setPos(_defaultDealerCardPos);
+    _scene->addItem(newCard.get());
+    _dealerLabel->setPlainText("dealer: " + QString::number(_dealer->score()));
+    qDebug() <<  _scene->items().contains(newCard.get());
 
-        _defaultPlayerCardPos.setX(_defaultPlayerCardPos.x() + distanceBetweenCards);
-    }
-    else
-    {
-        onClickedNewCardWidget();
-    }
+    _defaultDealerCardPos.setX(_defaultDealerCardPos.x() + distanceBetweenCards);
 }
 
 
-
-AbstractCard *GameController::getNewCardFromStack()
+std::shared_ptr<AbstractCard> GameController::getNewCardFromStack()
 {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<size_t> dis(0, _cardStack.size() - 1);
-    size_t randomIndex = dis(gen);
+    if (_cardStack.empty())
+        return nullptr;
 
-    AbstractCard *newCard = _cardStack[randomIndex].get();
+    auto newCard = (_cardStack.front());
+    //_cardStack.erase(_cardStack.begin());
 
     return newCard;
 }
+
 
 void GameController::addLabelsOnScene()
 {
