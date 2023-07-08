@@ -5,6 +5,7 @@
 #include "players/dealer.h"
 #include "players/player.h"
 #include "scene/scene.h"
+#include "graphicsItems/label.h"
 
 #include <QGraphicsItem>
 #include <random>
@@ -14,9 +15,12 @@ GameController::GameController(Scene *scene)
       _scene(scene),
       _player(new Player()),
       _dealer(new Dealer()),
+      _playerLabel(new Label("player: ")),
+      _dealerLabel(new Label("dealer: ")),
       _newCardWidget(new NewCardWidget()),
       _cardStack(_newCardWidget->initCardStack())
 {
+    addLabelsOnScene();
     _scene->addItem(_newCardWidget);
     _newCardWidget->setPos(1000, 230);
 }
@@ -74,4 +78,12 @@ AbstractCard *GameController::getNewCardFromStack()
     AbstractCard *newCard = _cardStack[randomIndex].get();
 
     return newCard;
+}
+
+void GameController::addLabelsOnScene()
+{
+    _scene->addItem(_playerLabel);
+    _playerLabel->setPos(400,435);
+    _scene->addItem(_dealerLabel);
+    _dealerLabel->setPos(400,195);
 }

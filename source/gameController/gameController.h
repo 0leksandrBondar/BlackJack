@@ -6,6 +6,7 @@
 #include <vector>
 
 class Scene;
+class Label;
 class Dealer;
 class Player;
 class AbstractCard;
@@ -21,11 +22,14 @@ public:
     void onClickedNewCardWidget();
 private:
     AbstractCard *getNewCardFromStack();
+    void addLabelsOnScene();
 
 private:
     Scene *_scene;
     Player *_player;
     Dealer *_dealer;
+    Label *_playerLabel;
+    Label *_dealerLabel;
     NewCardWidget *_newCardWidget;
     QPointF _defaultPlayerCardPos{ 400, 470 };
     std::vector<std::unique_ptr<AbstractCard>> _cardStack;
