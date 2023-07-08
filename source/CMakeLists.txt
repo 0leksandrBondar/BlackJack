@@ -16,6 +16,7 @@ set(SOURCES
     players/dealer.cpp
     players/abstractplayer.cpp
     model/cardmodel.cpp
+    model/playermodel.cpp
     resource/frontcardimage.qrc
 )
 
@@ -35,6 +36,7 @@ set(HEADERS
     players/abstractplayer.h
     model/cardmodel.h
     model/cardsuit.h
+    model/playermodel.h
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})

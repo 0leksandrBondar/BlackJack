@@ -1,7 +1,7 @@
 #pragma once
 
-#include <QPointF>
 #include <QObject>
+#include <QPointF>
 
 #include <vector>
 
@@ -20,8 +20,14 @@ public:
     ~GameController();
 
     void onClickedNewCardWidget();
+
+signals:
+    void playerReceivedCards();
+
 private:
-    AbstractCard *getNewCardFromStack();
+    void addNewCardToDealer();
+    std::shared_ptr<AbstractCard> getNewCardFromStack();
+
     void addLabelsOnScene();
 
 private:
@@ -31,6 +37,7 @@ private:
     Label *_playerLabel;
     Label *_dealerLabel;
     NewCardWidget *_newCardWidget;
+    QPointF _defaultDealerCardPos{ 400, 30 };
     QPointF _defaultPlayerCardPos{ 400, 470 };
-    std::vector<std::unique_ptr<AbstractCard>> _cardStack;
+    std::vector<std::shared_ptr<AbstractCard>> _cardStack;
 };
