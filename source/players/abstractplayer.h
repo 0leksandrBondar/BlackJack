@@ -19,10 +19,11 @@ public:
     int balance() const;
     void updateBalance(int value);
 
-    void addCard(CardValue cardValue);
+    void addCard(AbstractCard *card);
+
+    std::vector<AbstractCard *> cards() const;
 
 private:
     int _balance;
     PlayerModel *_playerModel;
-   // QVector<std::shared_ptr<AbstractCard>> _cards;
 };

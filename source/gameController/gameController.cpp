@@ -14,9 +14,10 @@
 namespace Constants
 {
 const auto distanceBetweenCards = 40;
+const QPointF betLabelPos = { 40, 265 };
+const QPointF playerLabelPos = { 400, 435 };
+const QPointF dealerLabelPos = { 400, 195 };
 const QPointF newCardWidgetPos = { 1000, 230 };
-const QPointF playerLabelPos = { 400,435 };
-const QPointF dealerLabelPos = { 400,195 };
 } // namespace Constants
 
 GameController::GameController(Scene *scene)
@@ -24,6 +25,7 @@ GameController::GameController(Scene *scene)
       _scene(scene),
       _player(new Player()),
       _dealer(new Dealer()),
+      _betLabel(new Label("bet: 5.00")),
       _playerLabel(new Label("player: ")),
       _dealerLabel(new Label("dealer: ")),
       _newCardWidget(new NewCardWidget()),
@@ -33,22 +35,30 @@ GameController::GameController(Scene *scene)
     _scene->addItem(_newCardWidget);
     _newCardWidget->setPos(Constants::newCardWidgetPos);
     connect(this, &GameController::playerReceivedCards, this, &GameController::addNewCardToDealer);
+    prepareGameTable();
 }
 
 GameController::~GameController()
 {
+    delete _scene;
     delete _player;
     delete _dealer;
+    delete _betLabel;
+    delete _dealerLabel;
+    delete _playerLabel;
+    delete _newCardWidget;
 }
 
 void GameController::onClickedNewCardWidget()
 {
     const auto newCard = getNewCardFromStack();
 
+    newCard->setCardVisible(_cardVisible);
+
     newCard->setPos(_defaultPlayerCardPos);
     _scene->addItem(newCard);
 
-    _player->addCard(newCard->cardType().second);
+    _player->addCard(newCard);
     _playerLabel->setPlainText(QStringLiteral("player: %1").arg(QString::number(_player->score())));
 
     _defaultPlayerCardPos.setX(_defaultPlayerCardPos.x() + Constants::distanceBetweenCards);
@@ -56,15 +66,26 @@ void GameController::onClickedNewCardWidget()
     emit playerReceivedCards();
 }
 
+void GameController::onClickOnVisibilityToggleWidget()
+{
+    _cardVisible = !_cardVisible;
+    for (const auto playerCard : _player->cards())
+    {
+        playerCard->setCardVisible(_cardVisible);
+    }
+}
+
 void GameController::addNewCardToDealer()
 {
+    if (_dealer->score() >= 17)
+        return;
+
     auto newCard = getNewCardFromStack();
 
     newCard->setPos(_defaultDealerCardPos);
     _scene->addItem(newCard);
-    newCard->setCardVisible(false);
 
-    _dealer->addCard(newCard->cardType().second);
+    _dealer->addCard(newCard);
     _dealerLabel->setPlainText(QStringLiteral("dealer: %1").arg(QString::number(_dealer->score())));
 
     _defaultDealerCardPos.setX(_defaultDealerCardPos.x() + Constants::distanceBetweenCards);
@@ -81,8 +102,39 @@ AbstractCard *GameController::getNewCardFromStack()
     return newCard;
 }
 
+void GameController::prepareGameTable()
+{
+    for (int i = 0; i < 2; ++i)
+    {
+        auto newCard = getNewCardFromStack();
+        newCard->setPos(_defaultDealerCardPos);
+        _dealer->addCard(newCard);
+        _scene->addItem(newCard);
+
+        _defaultDealerCardPos.setX(_defaultDealerCardPos.x() + Constants::distanceBetweenCards);
+    }
+
+    _dealer->cards().front()->setCardVisible(false);
+
+    for (int i = 0; i < 2; ++i)
+    {
+        auto newCard = getNewCardFromStack();
+
+        newCard->setPos(_defaultPlayerCardPos);
+
+        _player->addCard(newCard);
+        _scene->addItem(newCard);
+
+        _defaultPlayerCardPos.setX(_defaultPlayerCardPos.x() + Constants::distanceBetweenCards);
+    }
+    _dealerLabel->setPlainText(QStringLiteral("dealer: %1").arg(QString::number(_dealer->score())));
+    _playerLabel->setPlainText(QStringLiteral("player: %1").arg(QString::number(_player->score())));
+}
+
 void GameController::addLabelsOnScene()
 {
+    _scene->addItem(_betLabel);
+    _betLabel->setPos(Constants::betLabelPos);
     _scene->addItem(_playerLabel);
     _playerLabel->setPos(Constants::playerLabelPos);
     _scene->addItem(_dealerLabel);

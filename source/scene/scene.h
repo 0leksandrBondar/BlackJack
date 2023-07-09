@@ -17,16 +17,17 @@ public:
 
 signals:
    void clickOnAddCardWidget();
+   void clickOnVisibilityToggleWidget();
 
-protected:
-    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+   protected:
+   void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
 
-private:
-    void addBaseWidgetsOnScene();
-    void setCustomPositionForBaseWidgets();
-    void setBackgroundImage(const QString path);
+   private:
+   void addBaseWidgetsOnScene();
+   void setCustomPositionForBaseWidgets();
+   void setBackgroundImage(const QString path);
 
-    BetWidget *_betWidget;
-    GameController *_gameController;
-    CardVisibilityToggle *_cardVisitor;
+   BetWidget *_betWidget;
+   GameController *_gameController;
+   CardVisibilityToggle *_cardVisitor;
 };

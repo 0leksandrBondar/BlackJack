@@ -20,20 +20,24 @@ public:
     ~GameController();
 
     void onClickedNewCardWidget();
+    void onClickOnVisibilityToggleWidget();
 
 signals:
     void playerReceivedCards();
 
 private:
+    void addLabelsOnScene();
     void addNewCardToDealer();
     AbstractCard *getNewCardFromStack();
-
-    void addLabelsOnScene();
+    void prepareGameTable();
 
 private:
+    bool _cardVisible{ false };
+
     Scene *_scene;
     Player *_player;
     Dealer *_dealer;
+    Label *_betLabel;
     Label *_playerLabel;
     Label *_dealerLabel;
     NewCardWidget *_newCardWidget;

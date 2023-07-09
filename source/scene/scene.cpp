@@ -28,6 +28,8 @@ Scene::Scene(QObject *parent)
     setBackgroundImage(QStringLiteral(":/fon.jpg"));
     connect(this, &Scene::clickOnAddCardWidget, _gameController,
             &GameController::onClickedNewCardWidget);
+    connect(this, &Scene::clickOnVisibilityToggleWidget, _gameController,
+            &GameController::onClickOnVisibilityToggleWidget);
 }
 
 void Scene::mousePressEvent(QGraphicsSceneMouseEvent *event)
@@ -42,6 +44,11 @@ void Scene::mousePressEvent(QGraphicsSceneMouseEvent *event)
         {
             if (dynamic_cast<NewCardWidget *>(item))
                 emit clickOnAddCardWidget();
+            if (dynamic_cast<CardVisibilityToggle *>(item))
+            {
+                emit clickOnVisibilityToggleWidget();
+                update();
+            }
         }
     }
 }
