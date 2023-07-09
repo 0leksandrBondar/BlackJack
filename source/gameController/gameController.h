@@ -26,7 +26,7 @@ signals:
 
 private:
     void addNewCardToDealer();
-    std::shared_ptr<AbstractCard> getNewCardFromStack();
+    AbstractCard *getNewCardFromStack();
 
     void addLabelsOnScene();
 
@@ -39,5 +39,5 @@ private:
     NewCardWidget *_newCardWidget;
     QPointF _defaultDealerCardPos{ 400, 30 };
     QPointF _defaultPlayerCardPos{ 400, 470 };
-    std::vector<std::shared_ptr<AbstractCard>> _cardStack;
+    std::vector<AbstractCard *> _cardStack;
 };

@@ -1,15 +1,23 @@
 #include "gameController.h"
 
 #include "cards/abstractcard.h"
+#include "graphicsItems/label.h"
 #include "graphicsItems/newcardwidget.h"
 #include "players/dealer.h"
 #include "players/player.h"
 #include "scene/scene.h"
-#include "graphicsItems/label.h"
 
+#include <QDebug>
 #include <QGraphicsItem>
 #include <random>
-#include <QDebug>
+
+namespace Constants
+{
+const auto distanceBetweenCards = 40;
+const QPointF newCardWidgetPos = { 1000, 230 };
+const QPointF playerLabelPos = { 400,435 };
+const QPointF dealerLabelPos = { 400,195 };
+} // namespace Constants
 
 GameController::GameController(Scene *scene)
     : QObject(nullptr),
@@ -23,7 +31,7 @@ GameController::GameController(Scene *scene)
 {
     addLabelsOnScene();
     _scene->addItem(_newCardWidget);
-    _newCardWidget->setPos(1000, 230);
+    _newCardWidget->setPos(Constants::newCardWidgetPos);
     connect(this, &GameController::playerReceivedCards, this, &GameController::addNewCardToDealer);
 }
 
@@ -36,52 +44,47 @@ GameController::~GameController()
 void GameController::onClickedNewCardWidget()
 {
     const auto newCard = getNewCardFromStack();
-    const auto distanceBetweenCards = 40;
 
     newCard->setPos(_defaultPlayerCardPos);
+    _scene->addItem(newCard);
+
     _player->addCard(newCard->cardType().second);
-    _scene->addItem(newCard.get());
-    _playerLabel->setPlainText("player: "  + QString::number(_player->score()));
-    qDebug() <<  _scene->items().contains(newCard.get());
+    _playerLabel->setPlainText(QStringLiteral("player: %1").arg(QString::number(_player->score())));
 
-
-    _defaultPlayerCardPos.setX(_defaultPlayerCardPos.x() + distanceBetweenCards);
+    _defaultPlayerCardPos.setX(_defaultPlayerCardPos.x() + Constants::distanceBetweenCards);
 
     emit playerReceivedCards();
 }
 
 void GameController::addNewCardToDealer()
 {
-    // this func must be refoctored and combined with onClickedNewCardWidget()
     auto newCard = getNewCardFromStack();
-    const auto distanceBetweenCards = 40;
+
+    newCard->setPos(_defaultDealerCardPos);
+    _scene->addItem(newCard);
+    newCard->setCardVisible(false);
 
     _dealer->addCard(newCard->cardType().second);
-   // newCard->setPos(_defaultDealerCardPos);
-    _scene->addItem(newCard.get());
-    _dealerLabel->setPlainText("dealer: " + QString::number(_dealer->score()));
-    qDebug() <<  _scene->items().contains(newCard.get());
+    _dealerLabel->setPlainText(QStringLiteral("dealer: %1").arg(QString::number(_dealer->score())));
 
-    _defaultDealerCardPos.setX(_defaultDealerCardPos.x() + distanceBetweenCards);
+    _defaultDealerCardPos.setX(_defaultDealerCardPos.x() + Constants::distanceBetweenCards);
 }
 
-
-std::shared_ptr<AbstractCard> GameController::getNewCardFromStack()
+AbstractCard *GameController::getNewCardFromStack()
 {
     if (_cardStack.empty())
         return nullptr;
 
-    auto newCard = (_cardStack.front());
-    //_cardStack.erase(_cardStack.begin());
+    const auto newCard = (_cardStack.front());
+    _cardStack.erase(_cardStack.begin());
 
     return newCard;
 }
 
-
 void GameController::addLabelsOnScene()
 {
     _scene->addItem(_playerLabel);
-    _playerLabel->setPos(400,435);
+    _playerLabel->setPos(Constants::playerLabelPos);
     _scene->addItem(_dealerLabel);
-    _dealerLabel->setPos(400,195);
+    _dealerLabel->setPos(Constants::dealerLabelPos);
 }

@@ -15,8 +15,12 @@ public:
     QRectF boundingRect() const;
     std::pair<CardSuit, CardValue> card() const;
 
+    void setCardVisible(bool visible);
+    bool cardVisible() const;
+
 private:
     int _value;
+    bool _cardVisible;
     QRectF _boundingRect;
     const QPointF _pos{ 500, 475 };
     CardSuit _cardSuit{ CardSuit::Undefined };

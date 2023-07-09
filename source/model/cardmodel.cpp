@@ -14,3 +14,7 @@ int CardModel::cardValue() const { return _value; }
 QRectF CardModel::boundingRect() const { return _boundingRect; }
 
 std::pair<CardSuit, CardValue> CardModel::card() const { return { _cardSuit, _cardValue }; }
+
+void CardModel::setCardVisible(bool visible) { _cardVisible = visible; }
+
+bool CardModel::cardVisible() const { return _cardVisible; }

@@ -25,7 +25,7 @@ void PlayerModel::calculateScore()
         if(_score > 10)
             value = 10;
         else
-            value = 11;
+            value = 1;
         switch (card)
         {
         case CardValue::Two:

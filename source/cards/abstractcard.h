@@ -18,10 +18,14 @@ public:
 
     std::pair<CardSuit, CardValue> cardType() const;
 
+    void setCardVisible(bool visible);
+    bool cardVisible() const;
+
 protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
 private:
     QString _pathImage;
+    QString _pathBackImage{ QStringLiteral(":/whiteCards/back.png") };
     std::unique_ptr<CardModel> _cardModel;
 };

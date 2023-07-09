@@ -12,7 +12,7 @@
 namespace Constants
 {
 const QPointF betWidgetPos = { 30, 300 };
-const QPointF defaultCardPos = { 500, 500 };
+const QRectF sceneRect = { 0, 0, 1200, 640 };
 const QPointF cardVisitorPos = { 1000, 400 };
 } // namespace Constants
 
@@ -22,7 +22,7 @@ Scene::Scene(QObject *parent)
       _gameController(new GameController(this)),
       _cardVisitor(new CardVisibilityToggle())
 {
-    setSceneRect(0, 0, 1200, 640);
+    setSceneRect(Constants::sceneRect);
     addBaseWidgetsOnScene();
     setCustomPositionForBaseWidgets();
     setBackgroundImage(QStringLiteral(":/fon.jpg"));
