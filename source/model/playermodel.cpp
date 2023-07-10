@@ -6,6 +6,8 @@ PlayerModel::PlayerModel() {}
 
 int PlayerModel::score() const { return _score; }
 
+void PlayerModel::resetScore() { _score = 0; }
+
 void PlayerModel::addCard(AbstractCard *cardValue)
 {
     _cards.push_back(cardValue);
@@ -16,16 +18,16 @@ std::vector<AbstractCard *> PlayerModel::cards() const { return _cards; }
 
 void PlayerModel::calculateScore()
 {
-    _score = 0;
-    int value;
+    resetScore();
+    int aceValue;
     for (const auto card : _cards)
     {
-         if (card->cardVisible())
+        if (card->cardVisible())
         {
             if (_score > 10)
-                value = 10;
+                aceValue = 10;
             else
-                value = 1;
+                aceValue = 1;
             switch (card->cardType().second)
             {
             case CardValue::Two:
@@ -59,11 +61,16 @@ void PlayerModel::calculateScore()
                 _score += 10;
                 break;
             case CardValue::Ace:
-                _score += value;
+                _score += aceValue;
                 break;
             case CardValue::Undefined:
                 break;
             }
         }
     }
+}
+
+void PlayerModel::clear()
+{
+    _cards.clear();
 }

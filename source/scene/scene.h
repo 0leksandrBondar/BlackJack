@@ -24,6 +24,4 @@ protected:
 
 private:
     void setBackgroundImage(const QString path);
-
-    GameController *_gameController;
 };

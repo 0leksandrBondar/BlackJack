@@ -7,8 +7,7 @@ set(SOURCES
     scene/mainwindow.cpp
     graphicsItems/gamewidget.cpp
     graphicsItems/newcardwidget.cpp
-    graphicsItems/betwidget.cpp
-    graphicsItems/cardvisibilitytoggle.cpp
+    graphicsItems/circlewidget.cpp
     graphicsItems/label.cpp
     gameController/gameController.cpp
     cards/abstractcard.cpp
@@ -26,8 +25,7 @@ set(HEADERS
     scene/mainwindow.h
     graphicsItems/gamewidget.h
     graphicsItems/newcardwidget.h
-    graphicsItems/betwidget.h
-    graphicsItems/cardvisibilitytoggle.h
+    graphicsItems/circlewidget.h
     graphicsItems/label.h
     gameController/gameController.h
     cards/abstractcard.h

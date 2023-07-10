@@ -12,7 +12,10 @@ public:
     ~AbstractPlayer();
 
     int score() const;
+    void resetScore();
     void updateScore(int value);
+
+    void clear();
 
     int balance() const;
     void updateBalance(int value);

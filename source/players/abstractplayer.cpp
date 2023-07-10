@@ -10,6 +10,10 @@ AbstractPlayer::~AbstractPlayer() { delete _playerModel; }
 
 int AbstractPlayer::score() const { return _playerModel->score(); }
 
+void AbstractPlayer::resetScore() { _playerModel->resetScore(); }
+
+void AbstractPlayer::clear() { _playerModel->clear(); }
+
 int AbstractPlayer::balance() const { return _balance; }
 
 void AbstractPlayer::updateBalance(int value) { _balance += value; }

@@ -124,8 +124,9 @@ std::vector<AbstractCard *> NewCardWidget::initCardStack()
     cards.push_back(new AbstractCard(make_pair(CardSuit::Diamonds, CardValue::Ace),
                                      QStringLiteral(":/whiteCards/diamonds_ace.png")));
 
-    auto rng = std::default_random_engine{};
-    std::shuffle(std::begin(cards), std::end(cards), rng);
+    std::random_device rd;
+    std::mt19937 generator(rd());
+    std::shuffle(cards.begin(), cards.end(), generator);
 
     return cards;
 }
