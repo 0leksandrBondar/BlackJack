@@ -20,7 +20,7 @@ public:
 
 private:
     int _value;
-    bool _cardVisible;
+    bool _cardVisible{ true };
     QRectF _boundingRect;
     const QPointF _pos{ 500, 475 };
     CardSuit _cardSuit{ CardSuit::Undefined };

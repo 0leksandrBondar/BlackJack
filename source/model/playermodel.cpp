@@ -20,7 +20,7 @@ void PlayerModel::calculateScore()
     int value;
     for (const auto card : _cards)
     {
-        if (card->cardVisible())
+         if (card->cardVisible())
         {
             if (_score > 10)
                 value = 10;
@@ -53,14 +53,8 @@ void PlayerModel::calculateScore()
                 _score += 9;
                 break;
             case CardValue::Ten:
-                _score += 10;
-                break;
             case CardValue::Jack:
-                _score += 10;
-                break;
             case CardValue::Queen:
-                _score += 10;
-                break;
             case CardValue::King:
                 _score += 10;
                 break;

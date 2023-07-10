@@ -55,5 +55,7 @@
         <file>whiteCards/spades_three.png</file>
         <file>whiteCards/spades_two.png</file>
         <file>whiteCards/back.png</file>
+        <file>stop.png</file>
+        <file>restart.png</file>
     </qresource>
 </RCC>

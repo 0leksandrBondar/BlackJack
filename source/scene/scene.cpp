@@ -1,8 +1,6 @@
 #include "scene.h"
 
 #include "gameController/gameController.h"
-#include "graphicsItems/betwidget.h"
-#include "graphicsItems/cardvisibilitytoggle.h"
 #include "graphicsItems/newcardwidget.h"
 
 #include <QGraphicsSceneMouseEvent>
@@ -11,20 +9,14 @@
 
 namespace Constants
 {
-const QPointF betWidgetPos = { 30, 300 };
 const QRectF sceneRect = { 0, 0, 1200, 640 };
-const QPointF cardVisitorPos = { 1000, 400 };
 } // namespace Constants
 
 Scene::Scene(QObject *parent)
     : QGraphicsScene(parent),
-      _betWidget(new BetWidget()),
-      _gameController(new GameController(this)),
-      _cardVisitor(new CardVisibilityToggle())
+      _gameController(new GameController(this))
 {
     setSceneRect(Constants::sceneRect);
-    addBaseWidgetsOnScene();
-    setCustomPositionForBaseWidgets();
     setBackgroundImage(QStringLiteral(":/fon.jpg"));
     connect(this, &Scene::clickOnAddCardWidget, _gameController,
             &GameController::onClickedNewCardWidget);
@@ -44,13 +36,10 @@ void Scene::mousePressEvent(QGraphicsSceneMouseEvent *event)
         {
             if (dynamic_cast<NewCardWidget *>(item))
                 emit clickOnAddCardWidget();
-            if (dynamic_cast<CardVisibilityToggle *>(item))
-            {
-                emit clickOnVisibilityToggleWidget();
-                update();
-            }
         }
     }
+
+    QGraphicsScene::mousePressEvent(event);
 }
 
 void Scene::setBackgroundImage(const QString path)
@@ -60,17 +49,4 @@ void Scene::setBackgroundImage(const QString path)
         return;
 
     setBackgroundBrush(backgroundImage);
-}
-
-void Scene::addBaseWidgetsOnScene()
-{
-    addItem(_betWidget);
-    addItem(_cardVisitor);
-}
-
-void Scene::setCustomPositionForBaseWidgets()
-{
-    using namespace Constants;
-    _betWidget->setPos(betWidgetPos);
-    _cardVisitor->setPos(cardVisitorPos);
 }

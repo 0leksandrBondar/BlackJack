@@ -4,7 +4,7 @@
 
 #include <memory>
 
-class BetWidget;
+class CircleWidget;
 class AbstractCard;
 class GameController;
 class CardVisibilityToggle;
@@ -16,18 +16,14 @@ public:
     Scene(QObject *parent = nullptr);
 
 signals:
-   void clickOnAddCardWidget();
-   void clickOnVisibilityToggleWidget();
+    void clickOnAddCardWidget();
+    void clickOnVisibilityToggleWidget();
 
-   protected:
-   void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+protected:
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
 
-   private:
-   void addBaseWidgetsOnScene();
-   void setCustomPositionForBaseWidgets();
-   void setBackgroundImage(const QString path);
+private:
+    void setBackgroundImage(const QString path);
 
-   BetWidget *_betWidget;
-   GameController *_gameController;
-   CardVisibilityToggle *_cardVisitor;
+    GameController *_gameController;
 };

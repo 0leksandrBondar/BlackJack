@@ -1,7 +1,5 @@
 #pragma once
 
-#include "model/cardsuit.h"
-
 #include <QVector>
 
 class PlayerModel;
@@ -20,8 +18,9 @@ public:
     void updateBalance(int value);
 
     void addCard(AbstractCard *card);
-
     std::vector<AbstractCard *> cards() const;
+
+    void calculateScore();
 
 private:
     int _balance;

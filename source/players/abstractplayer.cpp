@@ -17,3 +17,5 @@ void AbstractPlayer::updateBalance(int value) { _balance += value; }
 void AbstractPlayer::addCard(AbstractCard *card) { _playerModel->addCard(card); }
 
 std::vector<AbstractCard *> AbstractPlayer::cards() const { return _playerModel->cards(); }
+
+void AbstractPlayer::calculateScore() { _playerModel->calculateScore(); }
