@@ -10,7 +10,9 @@ class GameWidget : public QWidget
     Q_OBJECT
 public:
     GameWidget(QWidget *parent = nullptr);
-    void foo();
+    void handleWinLabels();
+    void handleLoseLabels();
+    void handleTieLabels();
 
 private:
     void setUI();

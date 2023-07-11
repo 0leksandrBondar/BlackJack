@@ -174,17 +174,27 @@ void GameController::ComposeWidgetsOnScene()
 
 void GameController::checkWinner(int playerScore, int dealerScore)
 {
-    const bool isPlayerWinner{ (playerScore > dealerScore && playerScore <= 21) };
+    const bool isPlayerWinner{ (playerScore > dealerScore && playerScore <= 21)
+                               || (playerScore <= 21 && dealerScore > 21) };
     const bool isDealerWinner{ (dealerScore > playerScore && dealerScore <= 21)
                                || (playerScore > 21 && dealerScore <= 21) };
     const bool isTie{ (playerScore == dealerScore || (playerScore > 21 && dealerScore > 21)) };
 
     if (isDealerWinner)
+    {
         emit dealerIsWinner();
+        qDebug() << "dealerIsWinner";
+    }
     else if (isPlayerWinner)
+    {
         emit playerIsWinner();
+        qDebug() << "isPlayerWinner";
+    }
     else if (isTie)
+    {
+        qDebug() << "isTie";
         emit isMatchTie();
+    }
 }
 
 void GameController::prepareGameTable()

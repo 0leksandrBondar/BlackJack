@@ -9,11 +9,16 @@ namespace DefaultText
 {
 const QString playerIsWinner{ QStringLiteral("YOU WON!!") };
 const QString dealerIsWinner{ QStringLiteral("YOU LOST!!") };
+const QString matchIsTie{ QStringLiteral("MATCH TIE!!") };
 } // namespace DefaultText
 
 GameWidget::GameWidget(QWidget *parent) : QWidget(parent) { setUI(); }
 
-void GameWidget::foo() {}
+void GameWidget::handleWinLabels() { _victoryLabel->setText(DefaultText::playerIsWinner); }
+
+void GameWidget::handleLoseLabels() { _victoryLabel->setText(DefaultText::dealerIsWinner); }
+
+void GameWidget::handleTieLabels() { _victoryLabel->setText(DefaultText::matchIsTie); };
 
 void GameWidget::setUI()
 {

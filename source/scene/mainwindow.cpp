@@ -31,7 +31,10 @@ void MainWindow::setupUI()
 
 void MainWindow::initConnections()
 {
-    connect(_gameController, &GameController::isMatchTie, _gameWidget, &GameWidget::foo);
-    connect(_gameController, &GameController::dealerIsWinner, _gameWidget, &GameWidget::foo);
-    connect(_gameController, &GameController::playerIsWinner, _gameWidget, &GameWidget::foo);
+    connect(_gameController, &GameController::isMatchTie, _gameWidget,
+            &GameWidget::handleTieLabels);
+    connect(_gameController, &GameController::dealerIsWinner, _gameWidget,
+            &GameWidget::handleLoseLabels);
+    connect(_gameController, &GameController::playerIsWinner, _gameWidget,
+            &GameWidget::handleWinLabels);
 }
