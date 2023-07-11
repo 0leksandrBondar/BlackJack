@@ -43,6 +43,7 @@ target_link_libraries(${PROJECT_NAME}
   PRIVATE
    Qt6::Widgets
    Qt6::Core
+   Qt6::Multimedia
 )
 
 qt6_add_resources(RESOURCES resource/frontcardimage.qrc)
