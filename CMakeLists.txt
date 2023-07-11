@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.14)
 
-project(BlackJeck LANGUAGES CXX)
+project(BlackJack LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)

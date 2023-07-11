@@ -64,7 +64,7 @@ GameController::~GameController()
 
 void GameController::onClickedNewCardWidget()
 {
-    if (_player->score() >= 21)
+    if (_player->score() >= 21 || _pot == 0)
         return;
     const auto newCard = getNewCardFromStack();
 
@@ -77,18 +77,22 @@ void GameController::onClickedNewCardWidget()
     Constants::playerCardPos.setX(Constants::playerCardPos.x() + Constants::distanceBetweenCards);
 
     emit needUpadteScore();
+    if(_player->score() >= 21)
+        stopAction();
     emit playerReceivedCards();
 }
+
+void GameController::resetPot() { _pot = 0; }
 
 int GameController::playerBalance() const { return _player->balance(); }
 
 void GameController::betAction()
 {
+    if(_player->balance() <= 0)
+        return;
     const auto playerBalance = _player->balance();
-    qDebug() << "playerBalance BEFORE call bet = " << _player->balance();
     const auto newPlayerBalance = playerBalance - Constants::betValue;
     _player->updateBalance(newPlayerBalance);
-    qDebug() << "playerBalance when call bet = " << _player->balance();
 
     // Constants:: betValue * 2 because two players are betting (dealer and player)
     _pot += Constants::betValue * 2;
@@ -118,6 +122,7 @@ void GameController::restartGame()
             _scene->removeItem(cards);
     }
     emit needUpadteScore();
+    emit resetGame();
     initGameTable();
 }
 
@@ -188,7 +193,6 @@ void GameController::checkWinner(int playerScore, int dealerScore)
 
     int newBalance = 0;
 
-
     if (isDealerWinner)
     {
         const auto playerBalance = _dealer->balance();
@@ -198,23 +202,25 @@ void GameController::checkWinner(int playerScore, int dealerScore)
         _roundResult = RoundResult::DealerIsWinner;
         newBalance = _player->balance();
     }
-    const auto playerBalance = _player->balance();
-    if (isPlayerWinner)
+    else
     {
-        const auto newPlayerBalance = playerBalance + _pot;
+        const auto playerBalance = _player->balance();
+        int newPlayerBalance = 0;
+        if (isPlayerWinner)
+        {
+            newPlayerBalance = playerBalance + _pot;
+            _roundResult = RoundResult::PlayerIsWinner;
+        }
+        if (isTie)
+        {
+            newPlayerBalance = playerBalance + (_pot / 2);
+            _roundResult = RoundResult::Tie;
+        }
         _player->updateBalance(newPlayerBalance);
-        _roundResult = RoundResult::PlayerIsWinner;
         newBalance = _player->balance();
-    }
-    else if (isTie)
-    {
-        const auto newPlayerBalance = playerBalance + (_pot / 2);
-        _player->updateBalance(newPlayerBalance);
-        newBalance = _player->balance();
-        _roundResult = RoundResult::Tie;
     }
 
-    _pot = 0;
+    resetPot();
     emit roundIsFinished(_roundResult, newBalance);
 }
 
@@ -222,6 +228,8 @@ void GameController::initGameTable()
 {
     Constants::dealerCardPos = { 400, 30 };
     Constants::playerCardPos = { 400, 470 };
+    emit resetGame();
+
     _cardStack.clear();
     _cardStack = _newCardWidget->initCardStack();
 

@@ -29,7 +29,7 @@ std::vector<AbstractCard *> NewCardWidget::initCardStack()
     cards.push_back(new AbstractCard(make_pair(CardSuit::Clubs, CardValue::Seven),
                                      QStringLiteral(":/whiteCards/clubs_seven.png")));
     cards.push_back(new AbstractCard(make_pair(CardSuit::Clubs, CardValue::Eight),
-                                     QStringLiteral(":/whiteCards/clubs_eigth.png")));
+                                     QStringLiteral(":/whiteCards/clubs_eight.png")));
     cards.push_back(new AbstractCard(make_pair(CardSuit::Clubs, CardValue::Nine),
                                      QStringLiteral(":/whiteCards/clubs_nine.png")));
     cards.push_back(new AbstractCard(make_pair(CardSuit::Clubs, CardValue::Ten),

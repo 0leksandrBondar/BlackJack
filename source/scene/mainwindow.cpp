@@ -33,6 +33,8 @@ void MainWindow::initConnections()
 {
     connect(_gameController, &GameController::betMade, _gameWidget,
             &GameWidget::updateBalanceLabel);
+    connect(_gameController, &GameController::resetGame, _gameWidget,
+            &GameWidget::resetVictoryLabel);
     connect(_gameController, &GameController::roundIsFinished, _gameWidget,
             &GameWidget::handleWinLabels);
 }

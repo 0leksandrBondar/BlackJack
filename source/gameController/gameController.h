@@ -32,6 +32,7 @@ public:
     void onClickedNewCardWidget();
 
 signals:
+    void resetGame();
     void isMatchTie(int newBalance);
     void playerIsWinner(int newBalance);
     void dealerIsWinner(int newBalance);
@@ -41,6 +42,7 @@ signals:
     void roundIsFinished(RoundResult roundResult, int newBalance);
 
 private:
+    void resetPot();
     void betAction();
     void stopAction();
     void restartGame();

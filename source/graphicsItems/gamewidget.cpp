@@ -12,6 +12,7 @@ namespace DefaultText
 {
 const QString emptyValue{ QStringLiteral(" - ") };
 const QString matchIsTie{ QStringLiteral("TIE!!") };
+const QString hint{ QStringLiteral("Please make a bet") };
 const QString playerIsWinner{ QStringLiteral("YOU WON!!") };
 const QString dealerIsWinner{ QStringLiteral("YOU LOST!!") };
 const QString potlabel = QStringLiteral(
@@ -44,15 +45,13 @@ void GameWidget::handleWinLabels(RoundResult roundResult, int newBalance)
     _balanceLabel->setText(DefaultText::balancelabel.arg(newBalance));
 }
 
-void GameWidget::handleLoseLabels(int newBalance) { _victoryLabel->setText(DefaultText::dealerIsWinner); }
-
-void GameWidget::handleTieLabels(int newBalance) { _victoryLabel->setText(DefaultText::matchIsTie); }
-
 void GameWidget::updateBalanceLabel(int pot, int newPlayerBalance)
 {
     _potLabel->setText(DefaultText::potlabel.arg(pot));
     _balanceLabel->setText(DefaultText::balancelabel.arg(newPlayerBalance));
 }
+
+void GameWidget::resetVictoryLabel() { _victoryLabel->setText(DefaultText::hint); }
 
 void GameWidget::setGridUi()
 {
@@ -70,7 +69,7 @@ void GameWidget::initFields()
     _soundButton = new QPushButton(QStringLiteral("sound"), this);
     _balanceLabel = new QLabel(DefaultText::balancelabel.arg(25), this);
     _settingsButton = new QPushButton(QStringLiteral("setting"), this);
-    _victoryLabel = new QLabel(QStringLiteral("here will be info about victory"), this);
+    _victoryLabel = new QLabel(DefaultText::hint, this);
 
     _victoryLabel->setStyleSheet("color: white;");
     _potLabel->setStyleSheet("color: white;");

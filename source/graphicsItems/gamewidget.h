@@ -15,11 +15,10 @@ class GameWidget : public QWidget
 public:
     GameWidget(QWidget *parent = nullptr);
     void handleWinLabels(RoundResult roundResult, int newBalance);
-    void handleLoseLabels(int newBalance);
-    void handleTieLabels(int newBalance);
 
     void updateBalanceLabel(int pot, int newPlayerBalance);
     void updateBalanceLabelAfterWin(QString emptyValue);
+    void resetVictoryLabel();
 
 private:
     void setGridUi();
