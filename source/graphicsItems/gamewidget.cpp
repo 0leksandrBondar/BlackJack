@@ -1,5 +1,7 @@
 #include "gamewidget.h"
 
+#include "gameController/gameController.h"
+
 #include <QGridLayout>
 #include <QHBoxLayout>
 #include <QLabel>
@@ -8,9 +10,15 @@
 
 namespace DefaultText
 {
+const QString emptyValue{ QStringLiteral(" - ") };
+const QString matchIsTie{ QStringLiteral("TIE!!") };
 const QString playerIsWinner{ QStringLiteral("YOU WON!!") };
 const QString dealerIsWinner{ QStringLiteral("YOU LOST!!") };
-const QString matchIsTie{ QStringLiteral("TIE!!") };
+const QString potlabel = QStringLiteral(
+    "<span style='color: green'>Pot:</span> <span style='color: yellow'>$%1</span>");
+const QString balancelabel = QStringLiteral(
+    "<span style='color: green'>Balance:</span> <span style='color: yellow'>$%1</span>");
+
 } // namespace DefaultText
 
 GameWidget::GameWidget(QWidget *parent) : QWidget(parent)
@@ -23,11 +31,28 @@ GameWidget::GameWidget(QWidget *parent) : QWidget(parent)
     setGridUi();
 }
 
-void GameWidget::handleWinLabels() { _victoryLabel->setText(DefaultText::playerIsWinner); }
+void GameWidget::handleWinLabels(RoundResult roundResult, int newBalance)
+{
+    if (roundResult == RoundResult::PlayerIsWinner)
+        _victoryLabel->setText(DefaultText::playerIsWinner);
+    else if (roundResult == RoundResult::DealerIsWinner)
+        _victoryLabel->setText(DefaultText::dealerIsWinner);
+    else if (roundResult == RoundResult::Tie)
+        _victoryLabel->setText(DefaultText::matchIsTie);
 
-void GameWidget::handleLoseLabels() { _victoryLabel->setText(DefaultText::dealerIsWinner); }
+    _potLabel->setText(DefaultText::potlabel.arg(DefaultText::emptyValue));
+    _balanceLabel->setText(DefaultText::balancelabel.arg(newBalance));
+}
 
-void GameWidget::handleTieLabels() { _victoryLabel->setText(DefaultText::matchIsTie); };
+void GameWidget::handleLoseLabels(int newBalance) { _victoryLabel->setText(DefaultText::dealerIsWinner); }
+
+void GameWidget::handleTieLabels(int newBalance) { _victoryLabel->setText(DefaultText::matchIsTie); }
+
+void GameWidget::updateBalanceLabel(int pot, int newPlayerBalance)
+{
+    _potLabel->setText(DefaultText::potlabel.arg(pot));
+    _balanceLabel->setText(DefaultText::balancelabel.arg(newPlayerBalance));
+}
 
 void GameWidget::setGridUi()
 {
@@ -41,21 +66,21 @@ void GameWidget::initFields()
     _layout = new QGridLayout(this);
     _labelsLayout = new QHBoxLayout(this);
     _homeButton = new QPushButton(QStringLiteral("home"), this);
-    _cashLabel = new QLabel(QStringLiteral("Cash: $1000"), this);
+    _potLabel = new QLabel(DefaultText::potlabel.arg(" - "), this);
     _soundButton = new QPushButton(QStringLiteral("sound"), this);
-    _betLabel = new QLabel(QStringLiteral("Balance: $1000"), this);
+    _balanceLabel = new QLabel(DefaultText::balancelabel.arg(25), this);
     _settingsButton = new QPushButton(QStringLiteral("setting"), this);
     _victoryLabel = new QLabel(QStringLiteral("here will be info about victory"), this);
 
     _victoryLabel->setStyleSheet("color: white;");
-    _cashLabel->setStyleSheet("color: white;");
-    _betLabel->setStyleSheet("color: white;");
+    _potLabel->setStyleSheet("color: white;");
+    _balanceLabel->setStyleSheet("color: white;");
 }
 
 void GameWidget::addItemsOnWidget()
 {
-    _labelsLayout->addWidget(_betLabel);
-    _labelsLayout->addWidget(_cashLabel);
+    _labelsLayout->addWidget(_balanceLabel);
+    _labelsLayout->addWidget(_potLabel);
 
     _layout->addWidget(_homeButton, 0, 0);
     _layout->addWidget(_victoryLabel, 0, 1, Qt::AlignCenter);
@@ -76,8 +101,8 @@ void GameWidget::setStyleForItemsOnWidgets()
     QFont labelFont = _victoryLabel->font();
     labelFont.setPointSize(20);
     _victoryLabel->setFont(labelFont);
-    _betLabel->setFont(labelFont);
-    _cashLabel->setFont(labelFont);
+    _balanceLabel->setFont(labelFont);
+    _potLabel->setFont(labelFont);
 
     // set border and color
     QString roundButtonStyle

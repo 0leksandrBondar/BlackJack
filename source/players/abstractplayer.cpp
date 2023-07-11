@@ -14,9 +14,9 @@ void AbstractPlayer::resetScore() { _playerModel->resetScore(); }
 
 void AbstractPlayer::clear() { _playerModel->clear(); }
 
-int AbstractPlayer::balance() const { return _balance; }
+int AbstractPlayer::balance() const { return _playerModel->balance(); }
 
-void AbstractPlayer::updateBalance(int value) { _balance += value; }
+void AbstractPlayer::updateBalance(int value) { _playerModel->updateBalance(value); }
 
 void AbstractPlayer::addCard(AbstractCard *card) { _playerModel->addCard(card); }
 

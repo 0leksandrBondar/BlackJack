@@ -14,6 +14,9 @@
 
 namespace Constants
 {
+const int betValue{ 5 };
+QPointF dealerCardPos{ 400, 30 };
+QPointF playerCardPos{ 400, 470 };
 const auto distanceBetweenCards = 40;
 const QPointF betLabelPos = { 40, 265 };
 const QPointF betWidgetPos = { 30, 300 };
@@ -22,8 +25,6 @@ const QPointF playerLabelPos = { 400, 435 };
 const QPointF dealerLabelPos = { 400, 195 };
 const QPointF newCardWidgetPos = { 1000, 100 };
 const QPointF restartWidgetPos = { 1000, 420 };
-QPointF dealerCardPos{ 400, 30 };
-QPointF playerCardPos{ 400, 470 };
 } // namespace Constants
 
 GameController::GameController(Scene *scene)
@@ -44,7 +45,7 @@ GameController::GameController(Scene *scene)
     composeLogicWidgets();
     connect(this, &GameController::needUpadteScore, this, &GameController::updateScore);
     connect(_scene, &Scene::clickOnAddCardWidget, this, &GameController::onClickedNewCardWidget);
-    prepareGameTable();
+    initGameTable();
 }
 
 GameController::~GameController()
@@ -79,14 +80,19 @@ void GameController::onClickedNewCardWidget()
     emit playerReceivedCards();
 }
 
-void GameController::onClickOnVisibilityToggleWidget()
+int GameController::playerBalance() const { return _player->balance(); }
+
+void GameController::betAction()
 {
-    _cardVisible = !_cardVisible;
-    for (const auto playerCard : _player->cards())
-    {
-        playerCard->setCardVisible(_cardVisible);
-    }
-    emit needUpadteScore();
+    const auto playerBalance = _player->balance();
+    qDebug() << "playerBalance BEFORE call bet = " << _player->balance();
+    const auto newPlayerBalance = playerBalance - Constants::betValue;
+    _player->updateBalance(newPlayerBalance);
+    qDebug() << "playerBalance when call bet = " << _player->balance();
+
+    // Constants:: betValue * 2 because two players are betting (dealer and player)
+    _pot += Constants::betValue * 2;
+    emit betMade(_pot, _player->balance());
 }
 
 void GameController::stopAction()
@@ -112,13 +118,13 @@ void GameController::restartGame()
             _scene->removeItem(cards);
     }
     emit needUpadteScore();
-    prepareGameTable();
+    initGameTable();
 }
 
 void GameController::composeLogicWidgets()
 {
+    _betWidget->onClick([this]() { betAction(); });
     _stopWidget->onClick([this]() { stopAction(); });
-    _betWidget->onClick([]() { qDebug(" _betWidget Hello"); });
     _restartGame->onClick([this]() { restartGame(); });
 }
 
@@ -180,24 +186,39 @@ void GameController::checkWinner(int playerScore, int dealerScore)
                                || (playerScore > 21 && dealerScore <= 21) };
     const bool isTie{ (playerScore == dealerScore || (playerScore > 21 && dealerScore > 21)) };
 
+    int newBalance = 0;
+
+
     if (isDealerWinner)
     {
-        emit dealerIsWinner();
-        qDebug() << "dealerIsWinner";
+        const auto playerBalance = _dealer->balance();
+        const auto newPlayerBalance = playerBalance + _pot;
+
+        _dealer->updateBalance(newPlayerBalance);
+        _roundResult = RoundResult::DealerIsWinner;
+        newBalance = _player->balance();
     }
-    else if (isPlayerWinner)
+    const auto playerBalance = _player->balance();
+    if (isPlayerWinner)
     {
-        emit playerIsWinner();
-        qDebug() << "isPlayerWinner";
+        const auto newPlayerBalance = playerBalance + _pot;
+        _player->updateBalance(newPlayerBalance);
+        _roundResult = RoundResult::PlayerIsWinner;
+        newBalance = _player->balance();
     }
     else if (isTie)
     {
-        qDebug() << "isTie";
-        emit isMatchTie();
+        const auto newPlayerBalance = playerBalance + (_pot / 2);
+        _player->updateBalance(newPlayerBalance);
+        newBalance = _player->balance();
+        _roundResult = RoundResult::Tie;
     }
+
+    _pot = 0;
+    emit roundIsFinished(_roundResult, newBalance);
 }
 
-void GameController::prepareGameTable()
+void GameController::initGameTable()
 {
     Constants::dealerCardPos = { 400, 30 };
     Constants::playerCardPos = { 400, 470 };

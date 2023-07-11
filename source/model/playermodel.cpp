@@ -8,6 +8,10 @@ int PlayerModel::score() const { return _score; }
 
 void PlayerModel::resetScore() { _score = 0; }
 
+int PlayerModel::balance() const { return _balance; }
+
+void PlayerModel::updateBalance(int value) { _balance = value; }
+
 void PlayerModel::addCard(AbstractCard *cardValue)
 {
     _cards.push_back(cardValue);

@@ -7,14 +7,19 @@ class QPushButton;
 class QGridLayout;
 class QHBoxLayout;
 
+enum class RoundResult;
+
 class GameWidget : public QWidget
 {
     Q_OBJECT
 public:
     GameWidget(QWidget *parent = nullptr);
-    void handleWinLabels();
-    void handleLoseLabels();
-    void handleTieLabels();
+    void handleWinLabels(RoundResult roundResult, int newBalance);
+    void handleLoseLabels(int newBalance);
+    void handleTieLabels(int newBalance);
+
+    void updateBalanceLabel(int pot, int newPlayerBalance);
+    void updateBalanceLabelAfterWin(QString emptyValue);
 
 private:
     void setGridUi();
@@ -23,8 +28,8 @@ private:
     void setStyleForItemsOnWidgets();
 
 private:
-    QLabel *_betLabel;
-    QLabel *_cashLabel;
+    QLabel *_balanceLabel;
+    QLabel *_potLabel;
     QGridLayout *_layout;
     QLabel *_victoryLabel;
     QPushButton *_homeButton;
