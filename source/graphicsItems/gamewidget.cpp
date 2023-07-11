@@ -1,5 +1,6 @@
 #include "gamewidget.h"
 
+#include <QGridLayout>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QPushButton>
@@ -9,10 +10,18 @@ namespace DefaultText
 {
 const QString playerIsWinner{ QStringLiteral("YOU WON!!") };
 const QString dealerIsWinner{ QStringLiteral("YOU LOST!!") };
-const QString matchIsTie{ QStringLiteral("MATCH TIE!!") };
+const QString matchIsTie{ QStringLiteral("TIE!!") };
 } // namespace DefaultText
 
-GameWidget::GameWidget(QWidget *parent) : QWidget(parent) { setUI(); }
+GameWidget::GameWidget(QWidget *parent) : QWidget(parent)
+{
+    QPalette pal = QPalette();
+
+    pal.setColor(QPalette::Window, Qt::black);
+    setAutoFillBackground(true);
+    setPalette(pal);
+    setGridUi();
+}
 
 void GameWidget::handleWinLabels() { _victoryLabel->setText(DefaultText::playerIsWinner); }
 
@@ -20,45 +29,64 @@ void GameWidget::handleLoseLabels() { _victoryLabel->setText(DefaultText::dealer
 
 void GameWidget::handleTieLabels() { _victoryLabel->setText(DefaultText::matchIsTie); };
 
-void GameWidget::setUI()
+void GameWidget::setGridUi()
 {
-    QVBoxLayout *mainVerticalLayout = new QVBoxLayout(this);
-    QHBoxLayout *mainHorzontalLayout = new QHBoxLayout(this);
-    QHBoxLayout *victoryLayout = new QHBoxLayout;
-    QHBoxLayout *homeButtonLayout = new QHBoxLayout;
-    QHBoxLayout *settingsLayout = new QHBoxLayout;
-    QHBoxLayout *labelsLayout = new QHBoxLayout;
+    initFields();
+    addItemsOnWidget();
+    setStyleForItemsOnWidgets();
+}
 
-    QPushButton *settingsButton = new QPushButton(QStringLiteral("setting"), this);
+void GameWidget::initFields()
+{
+    _layout = new QGridLayout(this);
+    _labelsLayout = new QHBoxLayout(this);
     _homeButton = new QPushButton(QStringLiteral("home"), this);
+    _cashLabel = new QLabel(QStringLiteral("Cash: $1000"), this);
     _soundButton = new QPushButton(QStringLiteral("sound"), this);
-    QLabel *betLabel = new QLabel(QStringLiteral("Balance: $1000"), this);
-    QLabel *cashLabel = new QLabel(QStringLiteral("Cash: $1000"), this);
+    _betLabel = new QLabel(QStringLiteral("Balance: $1000"), this);
+    _settingsButton = new QPushButton(QStringLiteral("setting"), this);
     _victoryLabel = new QLabel(QStringLiteral("here will be info about victory"), this);
 
-    labelsLayout->addWidget(betLabel);
-    labelsLayout->addWidget(cashLabel);
+    _victoryLabel->setStyleSheet("color: white;");
+    _cashLabel->setStyleSheet("color: white;");
+    _betLabel->setStyleSheet("color: white;");
+}
 
-    _homeButton->setFixedSize(50, 50);
-    homeButtonLayout->addWidget(_homeButton);
-    _soundButton->setFixedSize(50, 50);
+void GameWidget::addItemsOnWidget()
+{
+    _labelsLayout->addWidget(_betLabel);
+    _labelsLayout->addWidget(_cashLabel);
 
-    settingsButton->setFixedSize(50, 50);
-    settingsLayout->addWidget(_soundButton);
-    settingsLayout->addWidget(settingsButton);
+    _layout->addWidget(_homeButton, 0, 0);
+    _layout->addWidget(_victoryLabel, 0, 1, Qt::AlignCenter);
+    _layout->addWidget(_soundButton, 0, 2);
+    _layout->addWidget(_settingsButton, 0, 3);
 
-    victoryLayout->addWidget(_victoryLabel);
-    victoryLayout->setAlignment(Qt::AlignCenter);
+    _layout->addLayout(_labelsLayout, 1, 1, Qt::AlignCenter);
+}
 
-    mainHorzontalLayout->addLayout(homeButtonLayout);
+void GameWidget::setStyleForItemsOnWidgets()
+{
+    // set size
+    _homeButton->setFixedSize(60, 60);
+    _soundButton->setFixedSize(60, 60);
+    _settingsButton->setFixedSize(60, 60);
 
-    mainHorzontalLayout->addLayout(victoryLayout);
-    mainHorzontalLayout->addLayout(settingsLayout);
-
+    // set Font
     QFont labelFont = _victoryLabel->font();
     labelFont.setPointSize(20);
     _victoryLabel->setFont(labelFont);
+    _betLabel->setFont(labelFont);
+    _cashLabel->setFont(labelFont);
 
-    mainVerticalLayout->addLayout(mainHorzontalLayout);
-    mainVerticalLayout->addLayout(labelsLayout);
+    // set border and color
+    QString roundButtonStyle
+        = "QPushButton { "
+          "border-radius: 25px; "
+          "background-color: green; "
+          "color: white; "
+          "}";
+    _homeButton->setStyleSheet(roundButtonStyle);
+    _soundButton->setStyleSheet(roundButtonStyle);
+    _settingsButton->setStyleSheet(roundButtonStyle);
 }
