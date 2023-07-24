@@ -1,6 +1,7 @@
 #pragma once
 
-#include <QVector>
+#include <memory>
+#include <vector>
 
 class PlayerModel;
 class AbstractCard;
@@ -20,8 +21,8 @@ public:
     int balance() const;
     void updateBalance(int value);
 
-    void addCard(AbstractCard *card);
-    std::vector<AbstractCard *> cards() const;
+    void addCard(std::shared_ptr<AbstractCard> card);
+    std::vector<std::shared_ptr<AbstractCard>> cards() const;
 
     void calculateScore();
 

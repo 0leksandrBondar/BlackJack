@@ -12,26 +12,26 @@ int PlayerModel::balance() const { return _balance; }
 
 void PlayerModel::updateBalance(int value) { _balance = value; }
 
-void PlayerModel::addCard(AbstractCard *cardValue)
+void PlayerModel::addCard(std::shared_ptr<AbstractCard> cardValue)
 {
     _cards.push_back(cardValue);
     calculateScore();
 }
 
-std::vector<AbstractCard *> PlayerModel::cards() const { return _cards; }
+std::vector<std::shared_ptr<AbstractCard>> PlayerModel::cards() const { return _cards; }
 
 void PlayerModel::calculateScore()
 {
     resetScore();
     int aceValue;
-    for (const auto card : _cards)
+    for (const auto &card : _cards)
     {
         if (card->cardVisible())
         {
             if (_score > 10)
-                aceValue = 10;
-            else
                 aceValue = 1;
+            else
+                aceValue = 11;
             switch (card->cardType().second)
             {
             case CardValue::Two:
@@ -74,7 +74,4 @@ void PlayerModel::calculateScore()
     }
 }
 
-void PlayerModel::clear()
-{
-    _cards.clear();
-}
+void PlayerModel::clear() { _cards.clear(); }

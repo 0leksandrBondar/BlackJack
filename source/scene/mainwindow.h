@@ -2,6 +2,8 @@
 
 #include <QMainWindow>
 
+#include <memory>
+
 class Scene;
 class SceneView;
 class GameWidget;
@@ -13,14 +15,13 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
 
-
 private:
     void setupUI();
     void initConnections();
 
 private:
-    Scene *_scene{ nullptr };
-    GameController *_gameController{ nullptr };
-    SceneView *_sceneView{ nullptr };
-    GameWidget *_gameWidget{ nullptr };
+    std::shared_ptr<Scene> _scene{ nullptr };
+    std::shared_ptr<GameController> _gameController{ nullptr };
+    std::shared_ptr<SceneView> _sceneView{ nullptr };
+    std::shared_ptr<GameWidget> _gameWidget{ nullptr };
 };

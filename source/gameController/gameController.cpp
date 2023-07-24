@@ -44,22 +44,9 @@ GameController::GameController(Scene *scene)
     ComposeWidgetsOnScene();
     composeLogicWidgets();
     connect(this, &GameController::needUpadteScore, this, &GameController::updateScore);
-    connect(_scene, &Scene::clickOnAddCardWidget, this, &GameController::onClickedNewCardWidget);
+    connect(_scene.get(), &Scene::clickOnAddCardWidget, this,
+            &GameController::onClickedNewCardWidget);
     initGameTable();
-}
-
-GameController::~GameController()
-{
-    delete _scene;
-    delete _player;
-    delete _dealer;
-    delete _betLabel;
-    delete _betWidget;
-    delete _dealerLabel;
-    delete _playerLabel;
-    delete _restartGame;
-    delete _newCardWidget;
-    delete _stopWidget;
 }
 
 void GameController::onClickedNewCardWidget()
@@ -71,13 +58,13 @@ void GameController::onClickedNewCardWidget()
     newCard->setCardVisible(_cardVisible);
     newCard->setPos(Constants::playerCardPos);
 
-    _scene->addItem(newCard);
+    _scene->addItem(newCard.get());
     _player->addCard(newCard);
 
     Constants::playerCardPos.setX(Constants::playerCardPos.x() + Constants::distanceBetweenCards);
 
     emit needUpadteScore();
-    if(_player->score() >= 21)
+    if (_player->score() >= 21)
         stopAction();
     emit playerReceivedCards();
 }
@@ -88,7 +75,7 @@ int GameController::playerBalance() const { return _player->balance(); }
 
 void GameController::betAction()
 {
-    if(_player->balance() <= 0)
+    if (_player->balance() <= 0)
         return;
     const auto playerBalance = _player->balance();
     const auto newPlayerBalance = playerBalance - Constants::betValue;
@@ -135,7 +122,7 @@ void GameController::composeLogicWidgets()
 
 void GameController::openClosedDealerCards()
 {
-    for (const auto dealerCard : _dealer->cards())
+    for (const auto &dealerCard : _dealer->cards())
     {
         if (dealerCard->cardVisible() == false)
         {
@@ -150,7 +137,7 @@ void GameController::addNewCardToDealer()
     auto newCard = getNewCardFromStack();
 
     newCard->setPos(Constants::dealerCardPos);
-    _scene->addItem(newCard);
+    _scene->addItem(newCard.get());
 
     _dealer->addCard(newCard);
     emit needUpadteScore();
@@ -158,7 +145,7 @@ void GameController::addNewCardToDealer()
     Constants::dealerCardPos.setX(Constants::dealerCardPos.x() + Constants::distanceBetweenCards);
 }
 
-AbstractCard *GameController::getNewCardFromStack()
+std::shared_ptr<AbstractCard> GameController::getNewCardFromStack()
 {
     if (_cardStack.empty())
         return nullptr;
@@ -171,12 +158,12 @@ AbstractCard *GameController::getNewCardFromStack()
 
 void GameController::ComposeWidgetsOnScene()
 {
-    _scene->addItem(_newCardWidget);
-    _scene->addItem(_betWidget);
-    _scene->addItem(_stopWidget);
+    _scene->addItem(_newCardWidget.get());
+    _scene->addItem(_betWidget.get());
+    _scene->addItem(_stopWidget.get());
     _stopWidget->setPos(Constants::stopWidgetPos);
     _betWidget->setPos(Constants::betWidgetPos);
-    _scene->addItem(_restartGame);
+    _scene->addItem(_restartGame.get());
     _restartGame->setPos(Constants::restartWidgetPos);
     _newCardWidget->setPos(Constants::newCardWidgetPos);
 
@@ -238,7 +225,7 @@ void GameController::initGameTable()
         auto newCard = getNewCardFromStack();
         newCard->setPos(Constants::dealerCardPos);
         _dealer->addCard(newCard);
-        _scene->addItem(newCard);
+        _scene->addItem(newCard.get());
 
         Constants::dealerCardPos.setX(Constants::dealerCardPos.x()
                                       + Constants::distanceBetweenCards);
@@ -253,7 +240,7 @@ void GameController::initGameTable()
         newCard->setPos(Constants::playerCardPos);
 
         _player->addCard(newCard);
-        _scene->addItem(newCard);
+        _scene->addItem(newCard.get());
 
         Constants::playerCardPos.setX(Constants::playerCardPos.x()
                                       + Constants::distanceBetweenCards);
@@ -271,10 +258,10 @@ void GameController::updateScore()
 
 void GameController::addLabelsOnScene()
 {
-    _scene->addItem(_betLabel);
+    _scene->addItem(_betLabel.get());
     _betLabel->setPos(Constants::betLabelPos);
-    _scene->addItem(_playerLabel);
+    _scene->addItem(_playerLabel.get());
     _playerLabel->setPos(Constants::playerLabelPos);
-    _scene->addItem(_dealerLabel);
+    _scene->addItem(_dealerLabel.get());
     _dealerLabel->setPos(Constants::dealerLabelPos);
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QWidget>
+#include <memory>
 
 class QLabel;
 class QPushButton;
@@ -27,12 +28,12 @@ private:
     void setStyleForItemsOnWidgets();
 
 private:
-    QLabel *_balanceLabel;
-    QLabel *_potLabel;
-    QGridLayout *_layout;
-    QLabel *_victoryLabel;
-    QPushButton *_homeButton;
-    QPushButton *_soundButton;
-    QHBoxLayout *_labelsLayout;
-    QPushButton *_settingsButton;
+    std::shared_ptr<QLabel> _potLabel;
+    std::shared_ptr<QGridLayout> _layout;
+    std::shared_ptr<QLabel> _balanceLabel;
+    std::shared_ptr<QLabel> _victoryLabel;
+    std::shared_ptr<QPushButton> _homeButton;
+    std::shared_ptr<QPushButton> _soundButton;
+    std::shared_ptr<QHBoxLayout> _labelsLayout;
+    std::shared_ptr<QPushButton> _settingsButton;
 };

@@ -1,6 +1,8 @@
 #pragma once
 
 #include "cards/abstractcard.h"
+
+#include <memory>
 #include <vector>
 
 class PlayerModel
@@ -14,8 +16,8 @@ public:
     int balance() const;
     void updateBalance(int value);
 
-    void addCard(AbstractCard *cardValue);
-    std::vector<AbstractCard *> cards() const;
+    void addCard(std::shared_ptr<AbstractCard> cardValue);
+    std::vector<std::shared_ptr<AbstractCard>> cards() const;
     void calculateScore();
 
     void clear();
@@ -23,5 +25,5 @@ public:
 private:
     int _score{ 0 };
     int _balance{ 25 };
-    std::vector<AbstractCard *> _cards;
+    std::vector<std::shared_ptr<AbstractCard>> _cards;
 };

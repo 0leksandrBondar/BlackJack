@@ -8,7 +8,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
       _scene(new Scene(this)),
-      _gameController(new GameController(_scene)),
+      _gameController(new GameController(_scene.get())),
       _sceneView(new SceneView(this)),
       _gameWidget(new GameWidget(this))
 {
@@ -20,21 +20,21 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::setupUI()
 {
     _sceneView->setGeometry(0, 0, width(), height() * 0.8);
-    _sceneView->setScene(_scene);
+    _sceneView->setScene(_scene.get());
 
     _gameWidget->setGeometry(0, height() * 0.8, width(), height() * 0.2);
 
     QVBoxLayout *layout = new QVBoxLayout(this);
-    layout->addWidget(_sceneView);
-    layout->addWidget(_gameWidget);
+    layout->addWidget(_sceneView.get());
+    layout->addWidget(_gameWidget.get());
 }
 
 void MainWindow::initConnections()
 {
-    connect(_gameController, &GameController::betMade, _gameWidget,
+    connect(_gameController.get(), &GameController::betMade, _gameWidget.get(),
             &GameWidget::updateBalanceLabel);
-    connect(_gameController, &GameController::resetGame, _gameWidget,
+    connect(_gameController.get(), &GameController::resetGame, _gameWidget.get(),
             &GameWidget::resetVictoryLabel);
-    connect(_gameController, &GameController::roundIsFinished, _gameWidget,
+    connect(_gameController.get(), &GameController::roundIsFinished, _gameWidget.get(),
             &GameWidget::handleWinLabels);
 }
