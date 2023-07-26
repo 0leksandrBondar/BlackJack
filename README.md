@@ -1,4 +1,4 @@
-# BlackJeck
+# BlackJack
 This project was developed as a test task
 
 # How to build
