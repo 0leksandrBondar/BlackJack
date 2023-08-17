@@ -7,6 +7,8 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QVBoxLayout>
+#include <QDialog>
+
 
 namespace DefaultText
 {
@@ -31,7 +33,8 @@ GameWidget::GameWidget(QWidget *parent)
       _homeButton{ new QPushButton(QStringLiteral("home"), this) },
       _soundButton{ new QPushButton(QStringLiteral("sound"), this) },
       _labelsLayout{ new QHBoxLayout(this) },
-      _settingsButton{ new QPushButton(QStringLiteral("setting"), this) }
+      _settingsButton{ new QPushButton(QStringLiteral("setting"), this) },
+      _settingDialog{new QDialog()}
 {
     QPalette pal = QPalette();
 
@@ -39,7 +42,17 @@ GameWidget::GameWidget(QWidget *parent)
     setAutoFillBackground(true);
     setPalette(pal);
     setGridUi();
+
+    connect(_settingsButton.get(), &QPushButton::clicked,this,&GameWidget::makeSettingDialogWindow);
 }
+
+void GameWidget::makeSettingDialogWindow()
+{
+    _settingDialog->exec();
+
+}
+
+
 
 void GameWidget::handleWinLabels(RoundResult roundResult, int newBalance)
 {
@@ -61,6 +74,8 @@ void GameWidget::updateBalanceLabel(int pot, int newPlayerBalance)
 }
 
 void GameWidget::resetVictoryLabel() { _victoryLabel->setText(DefaultText::hint); }
+
+
 
 void GameWidget::setGridUi()
 {
