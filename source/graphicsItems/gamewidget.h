@@ -28,7 +28,6 @@ private:
     void addItemsOnWidget();
     void setStyleForItemsOnWidgets();
 
-
 private:
     std::shared_ptr<QLabel> _potLabel;
     std::shared_ptr<QGridLayout> _layout;
@@ -39,5 +38,4 @@ private:
     std::shared_ptr<QHBoxLayout> _labelsLayout;
     std::shared_ptr<QPushButton> _settingsButton;
     std::unique_ptr<QDialog> _settingDialog;
-
 };

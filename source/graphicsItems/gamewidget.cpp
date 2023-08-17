@@ -9,7 +9,6 @@
 #include <QVBoxLayout>
 #include <QDialog>
 
-
 namespace DefaultText
 {
 const QString emptyValue{ QStringLiteral(" - ") };
@@ -49,10 +48,7 @@ GameWidget::GameWidget(QWidget *parent)
 void GameWidget::makeSettingDialogWindow()
 {
     _settingDialog->exec();
-
 }
-
-
 
 void GameWidget::handleWinLabels(RoundResult roundResult, int newBalance)
 {
@@ -74,8 +70,6 @@ void GameWidget::updateBalanceLabel(int pot, int newPlayerBalance)
 }
 
 void GameWidget::resetVictoryLabel() { _victoryLabel->setText(DefaultText::hint); }
-
-
 
 void GameWidget::setGridUi()
 {
