@@ -8,6 +8,7 @@ class QPushButton;
 class QGridLayout;
 class QHBoxLayout;
 
+class SettingWindow;
 enum class RoundResult;
 
 class GameWidget : public QWidget
@@ -20,7 +21,6 @@ public:
     void updateBalanceLabel(int pot, int newPlayerBalance);
     void updateBalanceLabelAfterWin(QString emptyValue);
     void resetVictoryLabel();
-    void makeSettingDialogWindow();
 
 private:
     void setGridUi();
@@ -37,5 +37,5 @@ private:
     std::shared_ptr<QPushButton> _soundButton;
     std::shared_ptr<QHBoxLayout> _labelsLayout;
     std::shared_ptr<QPushButton> _settingsButton;
-    std::unique_ptr<QDialog> _settingDialog;
+    std::unique_ptr<SettingWindow> _settingWindow;
 };

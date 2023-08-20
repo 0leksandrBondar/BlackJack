@@ -16,6 +16,7 @@ set(SOURCES
     players/abstractplayer.cpp
     model/cardmodel.cpp
     model/playermodel.cpp
+    dialogWindows/settingwindow.cpp
     resource/frontcardimage.qrc
 )
 
@@ -35,9 +36,11 @@ set(HEADERS
     model/cardmodel.h
     model/cardsuit.h
     model/playermodel.h
+    dialogWindows/settingwindow.h
 )
 
-add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS}
+    dialogWindows/settingwindow.h dialogWindows/settingwindow.cpp)
 
 target_link_libraries(${PROJECT_NAME}
   PRIVATE
