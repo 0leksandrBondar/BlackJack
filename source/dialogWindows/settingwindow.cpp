@@ -1,4 +1,5 @@
 #include "settingwindow.h"
 
-SettingWindow::SettingWindow() {}
+SettingWindow::SettingWindow(QWidget *parent) : QDialog(parent) {}
+
 void SettingWindow::makeSettingDialogWindow() { exec(); }

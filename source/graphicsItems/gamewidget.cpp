@@ -34,7 +34,7 @@ GameWidget::GameWidget(QWidget *parent)
       _soundButton{ new QPushButton(QStringLiteral("sound"), this) },
       _labelsLayout{ new QHBoxLayout(this) },
       _settingsButton{ new QPushButton(QStringLiteral("setting"), this) },
-      _settingWindow{ new SettingWindow() }
+      _settingWindow{ new SettingWindow(this) }
 {
     QPalette pal = QPalette();
 
@@ -43,7 +43,7 @@ GameWidget::GameWidget(QWidget *parent)
     setPalette(pal);
     setGridUi();
 
-    connect(_settingsButton.get(), &QPushButton::clicked, _settingWindow.get(),
+    connect(_settingsButton.get(), &QPushButton::clicked, _settingWindow,
             &SettingWindow::makeSettingDialogWindow);
 }
 

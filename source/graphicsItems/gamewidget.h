@@ -37,5 +37,5 @@ private:
     std::shared_ptr<QPushButton> _soundButton;
     std::shared_ptr<QHBoxLayout> _labelsLayout;
     std::shared_ptr<QPushButton> _settingsButton;
-    std::unique_ptr<SettingWindow> _settingWindow;
+    SettingWindow *_settingWindow;
 };
