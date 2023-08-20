@@ -3,7 +3,6 @@
 #include "dialogWindows/settingwindow.h"
 #include "gameController/gameController.h"
 
-// #include <QDialog>
 #include <QGridLayout>
 #include <QHBoxLayout>
 #include <QLabel>
@@ -44,7 +43,7 @@ GameWidget::GameWidget(QWidget *parent)
     setGridUi();
 
     connect(_settingsButton.get(), &QPushButton::clicked, _settingWindow,
-            &SettingWindow::makeSettingDialogWindow);
+            &SettingWindow::showSettingsWindow);
 }
 
 void GameWidget::handleWinLabels(RoundResult roundResult, int newBalance)

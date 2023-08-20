@@ -7,5 +7,5 @@ class SettingWindow : public QDialog
     Q_OBJECT
 public:
     SettingWindow(QWidget *parent = nullptr);
-    void makeSettingDialogWindow();
+    void showSettingsWindow();
 };
