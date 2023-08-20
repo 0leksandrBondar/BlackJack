@@ -1,8 +1,8 @@
 #include "gamewidget.h"
 
+#include "dialogWindows/settingwindow.h"
 #include "gameController/gameController.h"
 
-#include <QDialog>
 #include <QGridLayout>
 #include <QHBoxLayout>
 #include <QLabel>
@@ -33,7 +33,7 @@ GameWidget::GameWidget(QWidget *parent)
       _soundButton{ new QPushButton(QStringLiteral("sound"), this) },
       _labelsLayout{ new QHBoxLayout(this) },
       _settingsButton{ new QPushButton(QStringLiteral("setting"), this) },
-      _settingDialog{ new QDialog() }
+      _settingWindow{ new SettingWindow(this) }
 {
     QPalette pal = QPalette();
 
@@ -42,11 +42,9 @@ GameWidget::GameWidget(QWidget *parent)
     setPalette(pal);
     setGridUi();
 
-    connect(_settingsButton.get(), &QPushButton::clicked, this,
-            &GameWidget::makeSettingDialogWindow);
+    connect(_settingsButton.get(), &QPushButton::clicked, _settingWindow,
+            &SettingWindow::showSettingsWindow);
 }
-
-void GameWidget::makeSettingDialogWindow() { _settingDialog->exec(); }
 
 void GameWidget::handleWinLabels(RoundResult roundResult, int newBalance)
 {
