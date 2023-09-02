@@ -1,21 +1,24 @@
 #include "settingwindow.h"
+
 #include <QComboBox>
 #include <QHBoxLayout>
 #include <QLabel>
-#include <QMessageBox>
-#include <QPushButton>
 #include <QVBoxLayout>
 
-SettingWindow::SettingWindow(QWidget *parent) : QDialog(parent)
+SettingWindow::SettingWindow(QWidget *parent) : QDialog(parent) { initUi(); }
+
+void SettingWindow::showSettingsWindow() { exec(); }
+
+void SettingWindow::initUi()
 {
     resize(500, 550);
-    setWindowTitle("Settings");
+    setWindowTitle(QStringLiteral("Settings"));
 
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
-    QHBoxLayout *buttonLayout = new QHBoxLayout();
+    QHBoxLayout *buttonLayout = new QHBoxLayout(this);
 
-    changeThemeLabel = new QLabel("Change card theme", this);
-    changeThemeLabel->setFixedSize(150, 30);
+    _changeThemeLabel = new QLabel(QStringLiteral("Change card theme"), this);
+    _changeThemeLabel->setFixedSize(150, 30);
 
     QComboBox *listOfTheme = new QComboBox(this);
     listOfTheme->setFixedSize(100, 30);
@@ -24,8 +27,6 @@ SettingWindow::SettingWindow(QWidget *parent) : QDialog(parent)
 
     mainLayout->addLayout(buttonLayout);
     mainLayout->addStretch();
-    buttonLayout->addWidget(changeThemeLabel);
+    buttonLayout->addWidget(_changeThemeLabel);
     buttonLayout->addWidget(listOfTheme);
 }
-
-void SettingWindow::showSettingsWindow() { exec(); }

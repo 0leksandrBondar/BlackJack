@@ -1,8 +1,8 @@
 #pragma once
 
 #include <QDialog>
+
 class QLabel;
-class QPushButton;
 
 class SettingWindow : public QDialog
 {
@@ -10,7 +10,8 @@ class SettingWindow : public QDialog
 public:
     SettingWindow(QWidget *parent = nullptr);
     void showSettingsWindow();
+    void initUi();
 
 private:
-    QLabel *changeThemeLabel;
+    QLabel *_changeThemeLabel;
 };
