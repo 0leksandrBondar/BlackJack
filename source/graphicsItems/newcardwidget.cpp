@@ -46,7 +46,7 @@ std::vector<std::shared_ptr<AbstractCard>> NewCardWidget::initCardStack()
                                                   QStringLiteral(":/whiteCards/clubs_ten.png"))));
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Clubs, CardValue::Jack),
-                                                  QStringLiteral(":/whiteCards/clubs_jeck.png"))));
+                                                  QStringLiteral(":/whiteCards/clubs_jack.png"))));
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Clubs, CardValue::Queen),
                                                   QStringLiteral(":/whiteCards/clubs_queen.png"))));
@@ -86,7 +86,7 @@ std::vector<std::shared_ptr<AbstractCard>> NewCardWidget::initCardStack()
                                                   QStringLiteral(":/whiteCards/hearts_ten.png"))));
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Hearts, CardValue::Jack),
-                                                  QStringLiteral(":/whiteCards/hearts_jeck.png"))));
+                                                  QStringLiteral(":/whiteCards/hearts_jack.png"))));
     cards.push_back(shared_ptr<AbstractCard>(
         new AbstractCard(make_pair(CardSuit::Hearts, CardValue::Queen),
                          QStringLiteral(":/whiteCards/hearts_queen.png"))));
@@ -126,7 +126,7 @@ std::vector<std::shared_ptr<AbstractCard>> NewCardWidget::initCardStack()
                                                   QStringLiteral(":/whiteCards/spades_ten.png"))));
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Spades, CardValue::Jack),
-                                                  QStringLiteral(":/whiteCards/spades_jeck.png"))));
+                                                  QStringLiteral(":/whiteCards/spades_jack.png"))));
     cards.push_back(shared_ptr<AbstractCard>(
         new AbstractCard(make_pair(CardSuit::Spades, CardValue::Queen),
                          QStringLiteral(":/whiteCards/spades_queen.png"))));
@@ -166,7 +166,7 @@ std::vector<std::shared_ptr<AbstractCard>> NewCardWidget::initCardStack()
                          QStringLiteral(":/whiteCards/diamonds_ten.png"))));
     cards.push_back(shared_ptr<AbstractCard>(
         new AbstractCard(make_pair(CardSuit::Diamonds, CardValue::Jack),
-                         QStringLiteral(":/whiteCards/diamonds_jeck.png"))));
+                         QStringLiteral(":/whiteCards/diamonds_jack.png"))));
     cards.push_back(shared_ptr<AbstractCard>(
         new AbstractCard(make_pair(CardSuit::Diamonds, CardValue::Queen),
                          QStringLiteral(":/whiteCards/diamonds_queen.png"))));
