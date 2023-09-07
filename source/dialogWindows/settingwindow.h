@@ -1,21 +1,27 @@
 #pragma once
 
+#include <QComboBox>
 #include <QDialog>
 
 class QLabel;
 
 class SettingWindow : public QDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 public:
-    SettingWindow(QWidget *parent = nullptr);
-    void showSettingsWindow();
-    void initUi();
-protected:
+	SettingWindow(QWidget* parent = nullptr);
+	void showSettingsWindow();
+	void initUi();
+	void foo();
+signals:
+	void changeTheme(int text);
 
- void paintEvent(QPaintEvent *event) override;
- void colorLabel();
+protected:
+	void paintEvent(QPaintEvent* event) override;
+	void colorLabel();
 
 private:
-    QLabel *_changeThemeLabel;
+	QLabel* _changeThemeLabel;
+	QComboBox* _listOfTheme;
+	QString _currentTheme;
 };

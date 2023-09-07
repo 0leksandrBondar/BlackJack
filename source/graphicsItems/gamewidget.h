@@ -21,6 +21,9 @@ public:
     void updateBalanceLabel(int pot, int newPlayerBalance);
     void updateBalanceLabelAfterWin(QString emptyValue);
     void resetVictoryLabel();
+	signals:
+		void requestChangeTheme();
+
 
 private:
     void setGridUi();

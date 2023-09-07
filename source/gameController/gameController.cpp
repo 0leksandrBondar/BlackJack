@@ -265,3 +265,9 @@ void GameController::addLabelsOnScene()
     _scene->addItem(_dealerLabel.get());
     _dealerLabel->setPos(Constants::dealerLabelPos);
 }
+
+void GameController::foo()
+{
+	qDebug()<<"hello";
+
+}
