@@ -19,163 +19,163 @@ std::vector<std::shared_ptr<AbstractCard>> NewCardWidget::initCardStack()
 
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Clubs, CardValue::Two),
-                                                  QStringLiteral(":/whiteCards/clubs_two.png"))));
+                                                  QStringLiteral("clubs_two.png"))));
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Clubs, CardValue::Three),
-                                                  QStringLiteral(":/whiteCards/clubs_three.png"))));
+                                                  QStringLiteral("clubs_three.png"))));
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Clubs, CardValue::Four),
-                                                  QStringLiteral(":/whiteCards/clubs_four.png"))));
+                                                  QStringLiteral("clubs_four.png"))));
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Clubs, CardValue::Five),
-                                                  QStringLiteral(":/whiteCards/clubs_five.png"))));
+                                                  QStringLiteral("clubs_five.png"))));
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Clubs, CardValue::Six),
-                                                  QStringLiteral(":/whiteCards/clubs_six.png"))));
+                                                  QStringLiteral("clubs_six.png"))));
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Clubs, CardValue::Seven),
-                                                  QStringLiteral(":/whiteCards/clubs_seven.png"))));
+                                                  QStringLiteral("clubs_seven.png"))));
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Clubs, CardValue::Eight),
-                                                  QStringLiteral(":/whiteCards/clubs_eight.png"))));
+                                                  QStringLiteral("clubs_eight.png"))));
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Clubs, CardValue::Nine),
-                                                  QStringLiteral(":/whiteCards/clubs_nine.png"))));
+                                                  QStringLiteral("clubs_nine.png"))));
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Clubs, CardValue::Ten),
-                                                  QStringLiteral(":/whiteCards/clubs_ten.png"))));
+                                                  QStringLiteral("clubs_ten.png"))));
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Clubs, CardValue::Jack),
-                                                  QStringLiteral(":/whiteCards/clubs_jack.png"))));
+                                                  QStringLiteral("clubs_jack.png"))));
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Clubs, CardValue::Queen),
-                                                  QStringLiteral(":/whiteCards/clubs_queen.png"))));
+                                                  QStringLiteral("clubs_queen.png"))));
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Clubs, CardValue::King),
-                                                  QStringLiteral(":/whiteCards/clubs_king.png"))));
+                                                  QStringLiteral("clubs_king.png"))));
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Clubs, CardValue::Ace),
-                                                  QStringLiteral(":/whiteCards/clubs_ace.png"))));
+                                                  QStringLiteral("clubs_ace.png"))));
 
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Hearts, CardValue::Two),
-                                                  QStringLiteral(":/whiteCards/hearts_two.png"))));
+                                                  QStringLiteral("hearts_two.png"))));
     cards.push_back(shared_ptr<AbstractCard>(
         new AbstractCard(make_pair(CardSuit::Hearts, CardValue::Three),
-                         QStringLiteral(":/whiteCards/hearts_three.png"))));
+                         QStringLiteral("hearts_three.png"))));
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Hearts, CardValue::Four),
-                                                  QStringLiteral(":/whiteCards/hearts_four.png"))));
+                                                  QStringLiteral("hearts_four.png"))));
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Hearts, CardValue::Five),
-                                                  QStringLiteral(":/whiteCards/hearts_five.png"))));
+                                                  QStringLiteral("hearts_five.png"))));
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Hearts, CardValue::Six),
-                                                  QStringLiteral(":/whiteCards/hearts_six.png"))));
+                                                  QStringLiteral("hearts_six.png"))));
     cards.push_back(shared_ptr<AbstractCard>(
         new AbstractCard(make_pair(CardSuit::Hearts, CardValue::Seven),
-                         QStringLiteral(":/whiteCards/hearts_seven.png"))));
+                         QStringLiteral("hearts_seven.png"))));
     cards.push_back(shared_ptr<AbstractCard>(
         new AbstractCard(make_pair(CardSuit::Hearts, CardValue::Eight),
-                         QStringLiteral(":/whiteCards/hearts_eight.png"))));
+                         QStringLiteral("hearts_eight.png"))));
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Hearts, CardValue::Nine),
-                                                  QStringLiteral(":/whiteCards/hearts_nine.png"))));
+                                                  QStringLiteral("hearts_nine.png"))));
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Hearts, CardValue::Ten),
-                                                  QStringLiteral(":/whiteCards/hearts_ten.png"))));
+                                                  QStringLiteral("hearts_ten.png"))));
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Hearts, CardValue::Jack),
-                                                  QStringLiteral(":/whiteCards/hearts_jack.png"))));
+                                                  QStringLiteral("hearts_jack.png"))));
     cards.push_back(shared_ptr<AbstractCard>(
         new AbstractCard(make_pair(CardSuit::Hearts, CardValue::Queen),
-                         QStringLiteral(":/whiteCards/hearts_queen.png"))));
+                         QStringLiteral("hearts_queen.png"))));
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Hearts, CardValue::King),
-                                                  QStringLiteral(":/whiteCards/hearts_king.png"))));
+                                                  QStringLiteral("hearts_king.png"))));
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Hearts, CardValue::Ace),
-                                                  QStringLiteral(":/whiteCards/hearts_ace.png"))));
+                                                  QStringLiteral("hearts_ace.png"))));
 
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Spades, CardValue::Two),
-                                                  QStringLiteral(":/whiteCards/spades_two.png"))));
+                                                  QStringLiteral("spades_two.png"))));
     cards.push_back(shared_ptr<AbstractCard>(
         new AbstractCard(make_pair(CardSuit::Spades, CardValue::Three),
-                         QStringLiteral(":/whiteCards/spades_three.png"))));
+                         QStringLiteral("spades_three.png"))));
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Spades, CardValue::Four),
-                                                  QStringLiteral(":/whiteCards/spades_four.png"))));
+                                                  QStringLiteral("spades_four.png"))));
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Spades, CardValue::Five),
-                                                  QStringLiteral(":/whiteCards/spades_five.png"))));
+                                                  QStringLiteral("spades_five.png"))));
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Spades, CardValue::Six),
-                                                  QStringLiteral(":/whiteCards/spades_six.png"))));
+                                                  QStringLiteral("spades_six.png"))));
     cards.push_back(shared_ptr<AbstractCard>(
         new AbstractCard(make_pair(CardSuit::Spades, CardValue::Seven),
-                         QStringLiteral(":/whiteCards/spades_seven.png"))));
+                         QStringLiteral("spades_seven.png"))));
     cards.push_back(shared_ptr<AbstractCard>(
         new AbstractCard(make_pair(CardSuit::Spades, CardValue::Eight),
-                         QStringLiteral(":/whiteCards/spades_eight.png"))));
+                         QStringLiteral("spades_eight.png"))));
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Spades, CardValue::Nine),
-                                                  QStringLiteral(":/whiteCards/spades_nine.png"))));
+                                                  QStringLiteral("spades_nine.png"))));
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Spades, CardValue::Ten),
-                                                  QStringLiteral(":/whiteCards/spades_ten.png"))));
+                                                  QStringLiteral("spades_ten.png"))));
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Spades, CardValue::Jack),
-                                                  QStringLiteral(":/whiteCards/spades_jack.png"))));
+                                                  QStringLiteral("spades_jack.png"))));
     cards.push_back(shared_ptr<AbstractCard>(
         new AbstractCard(make_pair(CardSuit::Spades, CardValue::Queen),
-                         QStringLiteral(":/whiteCards/spades_queen.png"))));
+                         QStringLiteral("spades_queen.png"))));
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Spades, CardValue::King),
-                                                  QStringLiteral(":/whiteCards/spades_king.png"))));
+                                                  QStringLiteral("spades_king.png"))));
     cards.push_back(
         shared_ptr<AbstractCard>(new AbstractCard(make_pair(CardSuit::Spades, CardValue::Ace),
-                                                  QStringLiteral(":/whiteCards/spades_ace.png"))));
+                                                  QStringLiteral("spades_ace.png"))));
 
     cards.push_back(shared_ptr<AbstractCard>(
         new AbstractCard(make_pair(CardSuit::Diamonds, CardValue::Two),
-                         QStringLiteral(":/whiteCards/diamonds_two.png"))));
+                         QStringLiteral("diamonds_two.png"))));
     cards.push_back(shared_ptr<AbstractCard>(
         new AbstractCard(make_pair(CardSuit::Diamonds, CardValue::Three),
-                         QStringLiteral(":/whiteCards/diamonds_three.png"))));
+                         QStringLiteral("diamonds_three.png"))));
     cards.push_back(shared_ptr<AbstractCard>(
         new AbstractCard(make_pair(CardSuit::Diamonds, CardValue::Four),
-                         QStringLiteral(":/whiteCards/diamonds_four.png"))));
+                         QStringLiteral("diamonds_four.png"))));
     cards.push_back(shared_ptr<AbstractCard>(
         new AbstractCard(make_pair(CardSuit::Diamonds, CardValue::Five),
-                         QStringLiteral(":/whiteCards/diamonds_five.png"))));
+                         QStringLiteral("diamonds_five.png"))));
     cards.push_back(shared_ptr<AbstractCard>(
         new AbstractCard(make_pair(CardSuit::Diamonds, CardValue::Six),
-                         QStringLiteral(":/whiteCards/diamonds_six.png"))));
+                         QStringLiteral("diamonds_six.png"))));
     cards.push_back(shared_ptr<AbstractCard>(
         new AbstractCard(make_pair(CardSuit::Diamonds, CardValue::Seven),
-                         QStringLiteral(":/whiteCards/diamonds_seven.png"))));
+                         QStringLiteral("diamonds_seven.png"))));
     cards.push_back(shared_ptr<AbstractCard>(
         new AbstractCard(make_pair(CardSuit::Diamonds, CardValue::Eight),
-                         QStringLiteral(":/whiteCards/diamonds_eight.png"))));
+                         QStringLiteral("diamonds_eight.png"))));
     cards.push_back(shared_ptr<AbstractCard>(
         new AbstractCard(make_pair(CardSuit::Diamonds, CardValue::Nine),
-                         QStringLiteral(":/whiteCards/diamonds_nine.png"))));
+                         QStringLiteral("diamonds_nine.png"))));
     cards.push_back(shared_ptr<AbstractCard>(
         new AbstractCard(make_pair(CardSuit::Diamonds, CardValue::Ten),
-                         QStringLiteral(":/whiteCards/diamonds_ten.png"))));
+                         QStringLiteral("diamonds_ten.png"))));
     cards.push_back(shared_ptr<AbstractCard>(
         new AbstractCard(make_pair(CardSuit::Diamonds, CardValue::Jack),
-                         QStringLiteral(":/whiteCards/diamonds_jack.png"))));
+                         QStringLiteral("diamonds_jack.png"))));
     cards.push_back(shared_ptr<AbstractCard>(
         new AbstractCard(make_pair(CardSuit::Diamonds, CardValue::Queen),
-                         QStringLiteral(":/whiteCards/diamonds_queen.png"))));
+                         QStringLiteral("diamonds_queen.png"))));
     cards.push_back(shared_ptr<AbstractCard>(
         new AbstractCard(make_pair(CardSuit::Diamonds, CardValue::King),
-                         QStringLiteral(":/whiteCards/diamonds_king.png"))));
+                         QStringLiteral("diamonds_king.png"))));
     cards.push_back(shared_ptr<AbstractCard>(
         new AbstractCard(make_pair(CardSuit::Diamonds, CardValue::Ace),
-                         QStringLiteral(":/whiteCards/diamonds_ace.png"))));
+                         QStringLiteral("diamonds_ace.png"))));
 
     shuffleCards(cards);
 

@@ -31,7 +31,8 @@ public:
 
 	int playerBalance() const;
 	void onClickedNewCardWidget();
-	void foo();
+
+	void changeTheme();
 
 signals:
 	void resetGame();
@@ -61,6 +62,7 @@ private:
 
 private:
 	int _pot{0};
+	bool _isCardThemeChanged{false};
 	bool _cardVisible{true};
 	RoundResult _roundResult;
 

@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget* parent)
 	setFixedSize(1200, 800);
 	setupUI();
 	initConnections();
-	connect(_gameWidget.get(), &GameWidget::requestChangeTheme, _gameController.get(), &GameController::foo);
+	connect(_gameWidget.get(), &GameWidget::requestChangeTheme, _gameController.get(), &GameController::changeTheme);
 }
 
 void MainWindow::setupUI()

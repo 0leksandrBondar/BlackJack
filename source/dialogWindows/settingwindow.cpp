@@ -20,7 +20,6 @@ void SettingWindow::initUi()
 {
 	resize(500, 550);
 	setWindowTitle(QStringLiteral("Settings"));
-	// setStyleSheet( "background-image:url(:/settingsFon.jpg); background-size: cover; " );
 
 	QVBoxLayout* mainLayout = new QVBoxLayout(this);
 	QHBoxLayout* buttonLayout = new QHBoxLayout(this);
@@ -57,9 +56,4 @@ void SettingWindow::colorLabel()
 {
 	const QString color{"color: white;"};
 	_changeThemeLabel->setStyleSheet(color);
-}
-
-void SettingWindow::foo()
-{
-	qDebug("HElloooo 22222222");
 }

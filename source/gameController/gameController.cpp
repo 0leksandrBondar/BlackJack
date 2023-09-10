@@ -219,6 +219,11 @@ void GameController::initGameTable()
 
     _cardStack.clear();
     _cardStack = _newCardWidget->initCardStack();
+	for (auto card : _cardStack)
+	{
+		card->setCardTheme(_isCardThemeChanged);
+		card->update();
+	}
 
     for (int i = 0; i < 2; ++i)
     {
@@ -266,8 +271,23 @@ void GameController::addLabelsOnScene()
     _dealerLabel->setPos(Constants::dealerLabelPos);
 }
 
-void GameController::foo()
+void GameController::changeTheme()
 {
-	qDebug()<<"hello";
-
+	_isCardThemeChanged = !_isCardThemeChanged;
+	for (auto card : _cardStack)
+	{
+		card->setCardTheme(_isCardThemeChanged);
+		qDebug() << card->isThemeChanged() << " value theme cards after change theme";
+		card->update();
+	}
+	for (auto card : _player->cards())
+	{
+		card->setCardTheme(_isCardThemeChanged);
+		card->update();
+	}
+	for (auto card : _dealer->cards())
+	{
+		card->setCardTheme(_isCardThemeChanged);
+		card->update();
+	}
 }
