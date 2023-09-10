@@ -18,7 +18,7 @@ signals:
 
 protected:
 	void paintEvent(QPaintEvent* event) override;
-	void colorLabel();
+	void SetLabelColor();
 
 private:
 	QLabel* _changeThemeLabel;

@@ -35,7 +35,7 @@ void SettingWindow::initUi()
 	mainLayout->addStretch();
 	buttonLayout->addWidget(_changeThemeLabel);
 	buttonLayout->addWidget(_listOfTheme);
-	colorLabel();
+	SetLabelColor();
 	QFont labelFont = _changeThemeLabel->font();
 	labelFont.setPointSize(15);
 	_changeThemeLabel->setFont(labelFont);
@@ -52,7 +52,7 @@ void SettingWindow::paintEvent(QPaintEvent* event)
 	this->setPalette(palette);
 }
 
-void SettingWindow::colorLabel()
+void SettingWindow::SetLabelColor()
 {
 	const QString color{"color: white;"};
 	_changeThemeLabel->setStyleSheet(color);

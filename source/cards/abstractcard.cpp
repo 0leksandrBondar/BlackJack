@@ -35,15 +35,13 @@ bool AbstractCard::cardVisible() const
 void AbstractCard::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
 	const QRect rect{boundingRect().toRect()};
-	qDebug() <<_isThemeChanged << "= in pint cards";
-	const QString folderName = _isThemeChanged ? "darkCards" : "whiteCards";
+	const QString folderName = _isThemeChanged ? QStringLiteral("darkCards") : QStringLiteral("whiteCards");
 	const auto fullPath = QStringLiteral(":/%1/%2").arg(folderName).arg(_pathImage);
 	const auto pathToImage = _cardModel->cardVisible() ? fullPath : _pathBackImage;
 	QPixmap pixmap(pathToImage);
 
 	if (pixmap.isNull())
 	{
-		qDebug() << "pixMap is empty!!";
 		return;
 	}
 
