@@ -37,11 +37,11 @@ void AbstractCard::paint(QPainter* painter, const QStyleOptionGraphicsItem* opti
 {
 	const QRect rect{boundingRect().toRect()};
 	QString folderName;
-	if (_isThemeChanged == CardTheme::WhiteTheme)
+	if (_cardTheme == CardTheme::WhiteTheme)
 	{
 		folderName = QStringLiteral("whiteCards");
 	}
-	if (_isThemeChanged == CardTheme::DarkTheme)
+	if (_cardTheme == CardTheme::DarkTheme)
 	{
 		folderName = QStringLiteral("darkCards");
 	}
@@ -63,10 +63,10 @@ void AbstractCard::paint(QPainter* painter, const QStyleOptionGraphicsItem* opti
 
 void AbstractCard::setCardTheme(CardTheme theme)
 {
-	_isThemeChanged = theme;
+	_cardTheme = theme;
 }
 
 CardTheme AbstractCard::isThemeChanged() const
 {
-	return _isThemeChanged;
+	return _cardTheme;
 }

@@ -53,6 +53,5 @@
         <file>darkCards/spades_ten.png</file>
         <file>darkCards/spades_three.png</file>
         <file>darkCards/spades_two.png</file>
-        <file>darkCards/back.png</file>
     </qresource>
 </RCC>
