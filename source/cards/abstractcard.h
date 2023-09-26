@@ -1,6 +1,7 @@
 #pragma once
 
 #include "dialogWindows/settingwindow.h"
+
 #include <QGraphicsItem>
 #include <memory>
 
@@ -27,7 +28,7 @@ protected:
 
 private:
 	QString _pathImage;
-	CardTheme _isThemeChanged;
+	CardTheme _cardTheme;
 	QString _pathBackImage{QStringLiteral(":/whiteCards/back.png")};
 	std::unique_ptr<CardModel> _cardModel;
 };

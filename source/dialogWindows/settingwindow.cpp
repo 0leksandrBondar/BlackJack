@@ -12,7 +12,6 @@ SettingWindow::SettingWindow(QWidget* parent) : QDialog(parent)
 		[this](int index)
 		{
 			_currentTheme = _listOfTheme->currentData().value<CardTheme>();
-			qDebug() << "currentTheme = " << static_cast<int>(_currentTheme);
 			emit changeTheme(_currentTheme);
 		});
 }

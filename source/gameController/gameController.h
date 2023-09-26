@@ -1,7 +1,7 @@
 #pragma once
 
-#include "scene/scene.h"
 #include "dialogWindows/settingwindow.h"
+#include "scene/scene.h"
 
 #include <QObject>
 #include <QPointF>

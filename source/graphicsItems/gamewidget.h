@@ -1,8 +1,10 @@
 #pragma once
 
+#include "dialogWindows/settingwindow.h"
+
 #include <QWidget>
 #include <memory>
-#include "dialogWindows/settingwindow.h"
+
 class QLabel;
 class QPushButton;
 class QGridLayout;

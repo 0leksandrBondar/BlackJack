@@ -1,6 +1,6 @@
 #include "abstractcard.h"
-#include "dialogWindows/settingwindow.h"
 
+#include "dialogWindows/settingwindow.h"
 #include "model/cardmodel.h"
 
 #include <QPixmap>
@@ -36,24 +36,22 @@ bool AbstractCard::cardVisible() const
 void AbstractCard::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
 	const QRect rect{boundingRect().toRect()};
-	 QString folderName;
-	if(_isThemeChanged == CardTheme::WhiteTheme)
+	QString folderName;
+	if (_isThemeChanged == CardTheme::WhiteTheme)
 	{
-		folderName = "whiteCards";
-
+		folderName = QStringLiteral("whiteCards");
 	}
-	if(_isThemeChanged == CardTheme::DarkTheme)
+	if (_isThemeChanged == CardTheme::DarkTheme)
 	{
-		folderName = "darkCards";
+		folderName = QStringLiteral("darkCards");
 	}
 
 	const auto fullPath = QStringLiteral(":/%1/%2").arg(folderName).arg(_pathImage);
 	const auto pathToImage = _cardModel->cardVisible() ? fullPath : _pathBackImage;
 	QPixmap pixmap(pathToImage);
-
 	if (pixmap.isNull())
 	{
-		qDebug()<<pathToImage;
+		qDebug() << pathToImage;
 		return;
 	}
 
