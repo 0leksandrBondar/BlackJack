@@ -271,23 +271,22 @@ void GameController::addLabelsOnScene()
     _dealerLabel->setPos(Constants::dealerLabelPos);
 }
 
-void GameController::changeTheme()
+void GameController::changeTheme(CardTheme theme)
 {
-	_isCardThemeChanged = !_isCardThemeChanged;
+	_isCardThemeChanged = theme;
 	for (auto card : _cardStack)
 	{
-		card->setCardTheme(_isCardThemeChanged);
-		qDebug() << card->isThemeChanged() << " value theme cards after change theme";
+		card->setCardTheme(theme);
 		card->update();
 	}
 	for (auto card : _player->cards())
 	{
-		card->setCardTheme(_isCardThemeChanged);
+		card->setCardTheme(theme);
 		card->update();
 	}
 	for (auto card : _dealer->cards())
 	{
-		card->setCardTheme(_isCardThemeChanged);
+		card->setCardTheme(theme);
 		card->update();
 	}
 }

@@ -2,7 +2,7 @@
 
 #include <QWidget>
 #include <memory>
-
+#include "dialogWindows/settingwindow.h"
 class QLabel;
 class QPushButton;
 class QGridLayout;
@@ -22,7 +22,7 @@ public:
 	void updateBalanceLabelAfterWin(QString emptyValue);
 	void resetVictoryLabel();
 signals:
-	void requestChangeTheme();
+	void requestChangeTheme(CardTheme theme);
 
 private:
 	void setGridUi();

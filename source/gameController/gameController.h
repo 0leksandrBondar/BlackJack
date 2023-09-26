@@ -1,6 +1,7 @@
 #pragma once
 
 #include "scene/scene.h"
+#include "dialogWindows/settingwindow.h"
 
 #include <QObject>
 #include <QPointF>
@@ -32,7 +33,7 @@ public:
 	int playerBalance() const;
 	void onClickedNewCardWidget();
 
-	void changeTheme();
+	void changeTheme(CardTheme theme);
 
 signals:
 	void resetGame();
@@ -62,7 +63,7 @@ private:
 
 private:
 	int _pot{0};
-	bool _isCardThemeChanged{false};
+	CardTheme _isCardThemeChanged{CardTheme::WhiteTheme};
 	bool _cardVisible{true};
 	RoundResult _roundResult;
 

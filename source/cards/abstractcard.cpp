@@ -1,4 +1,5 @@
 #include "abstractcard.h"
+#include "dialogWindows/settingwindow.h"
 
 #include "model/cardmodel.h"
 
@@ -35,13 +36,24 @@ bool AbstractCard::cardVisible() const
 void AbstractCard::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
 	const QRect rect{boundingRect().toRect()};
-	const QString folderName = _isThemeChanged ? QStringLiteral("darkCards") : QStringLiteral("whiteCards");
+	 QString folderName;
+	if(_isThemeChanged == CardTheme::WhiteTheme)
+	{
+		folderName = "whiteCards";
+
+	}
+	if(_isThemeChanged == CardTheme::DarkTheme)
+	{
+		folderName = "darkCards";
+	}
+
 	const auto fullPath = QStringLiteral(":/%1/%2").arg(folderName).arg(_pathImage);
 	const auto pathToImage = _cardModel->cardVisible() ? fullPath : _pathBackImage;
 	QPixmap pixmap(pathToImage);
 
 	if (pixmap.isNull())
 	{
+		qDebug()<<pathToImage;
 		return;
 	}
 
@@ -51,12 +63,12 @@ void AbstractCard::paint(QPainter* painter, const QStyleOptionGraphicsItem* opti
 	painter->drawPixmap(rect, pixmap);
 }
 
-void AbstractCard::setCardTheme(bool status)
+void AbstractCard::setCardTheme(CardTheme theme)
 {
-	_isThemeChanged = status;
+	_isThemeChanged = theme;
 }
 
-bool AbstractCard::isThemeChanged() const
+CardTheme AbstractCard::isThemeChanged() const
 {
 	return _isThemeChanged;
 }

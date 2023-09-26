@@ -8,7 +8,13 @@
 SettingWindow::SettingWindow(QWidget* parent) : QDialog(parent)
 {
 	initUi();
-	connect(_listOfTheme, qOverload<int>(&QComboBox::currentIndexChanged), [this](int index) { emit changeTheme(index); });
+	connect(_listOfTheme, qOverload<int>(&QComboBox::currentIndexChanged),
+		[this](int index)
+		{
+			_currentTheme = _listOfTheme->currentData().value<CardTheme>();
+			qDebug() << "currentTheme = " << static_cast<int>(_currentTheme);
+			emit changeTheme(_currentTheme);
+		});
 }
 
 void SettingWindow::showSettingsWindow()
@@ -29,8 +35,10 @@ void SettingWindow::initUi()
 
 	_listOfTheme = new QComboBox(this);
 	_listOfTheme->setFixedSize(150, 30);
-	_listOfTheme->addItem(QStringLiteral("White"));
-	_listOfTheme->addItem(QStringLiteral("Dark"));
+	_listOfTheme->addItem(QStringLiteral("White"), CardTheme::WhiteTheme);
+	_listOfTheme->addItem(QStringLiteral("Dark"), CardTheme::DarkTheme);
+	_currentTheme = CardTheme::WhiteTheme;
+
 	mainLayout->addLayout(buttonLayout);
 	mainLayout->addStretch();
 	buttonLayout->addWidget(_changeThemeLabel);

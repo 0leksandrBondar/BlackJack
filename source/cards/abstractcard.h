@@ -1,5 +1,6 @@
 #pragma once
 
+#include "dialogWindows/settingwindow.h"
 #include <QGraphicsItem>
 #include <memory>
 
@@ -18,15 +19,15 @@ public:
 
 	void setCardVisible(bool visible);
 	bool cardVisible() const;
-	void setCardTheme(bool status);
-	bool isThemeChanged() const;
+	void setCardTheme(CardTheme theme);
+	CardTheme isThemeChanged() const;
 
 protected:
 	void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override;
 
 private:
 	QString _pathImage;
-	bool _isThemeChanged{false};
+	CardTheme _isThemeChanged;
 	QString _pathBackImage{QStringLiteral(":/whiteCards/back.png")};
 	std::unique_ptr<CardModel> _cardModel;
 };
